@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": 1740441600000,
+  "profile": {
+    "id": "profile",
+    "createdAt": 1740441600000,
+    "timezone": "Europe/Paris",
+    "wakeTime": "09:00",
+    "trainingWindowStart": "09:00",
+    "trainingWindowEnd": "10:00",
+    "shutdownTime": "23:30",
+    "bedDeadline": "01:00",
+    "signatureLine": "Je sais donc je suis.",
+    "language": "fr",
+    "difficultyMode": "Normal",
+    "schemaVersion": 1
+  },
+  "progression": {
+    "id": "progression",
+    "globalXP": 245,
+    "levelIndex": 2,
+    "streakDays": 5,
+    "corruption": 12,
+    "mutationCount": 0,
+    "graceTokensRemaining": 1,
+    "graceTokensResetMonth": "2026-02",
+    "lastActiveDate": "2026-02-25"
+  },
+  "stats": {
+    "id": "stats",
+    "MENTAL_score": 18,
+    "MENTAL_xp": 185,
+    "PHYSICAL_score": 22,
+    "PHYSICAL_xp": 220,
+    "DISCIPLINE_score": 15,
+    "DISCIPLINE_xp": 150,
+    "CREATION_score": 8,
+    "CREATION_xp": 80,
+    "SOCIAL_DOMINANCE_score": 10,
+    "SOCIAL_DOMINANCE_xp": 100,
+    "VISION_PRO_score": 5,
+    "VISION_PRO_xp": 50,
+    "EXECUTION_score": 12,
+    "EXECUTION_xp": 120,
+    "VNS_RITUAL_score": 6,
+    "VNS_RITUAL_xp": 60,
+    "blockingTags": {},
+    "updatedAt": 1740441600000
+  },
+  "daily_logs": [
+    {
+      "id": "log-sample-1",
+      "date": "2026-02-25",
+      "energy": 4,
+      "focus": 3,
+      "chaos": 2,
+      "friction": "trop de mails admin à traiter",
+      "avoided": "appel client difficile",
+      "proud": "entraînement fait avant 10h",
+      "intention": "terminer le bloc création ce soir",
+      "createdAt": 1740441600000
+    }
+  ],
+  "day_state": [
+    {
+      "date": "2026-02-25",
+      "checkinDone": true,
+      "trainingDone": true,
+      "shutdownDone": false,
+      "contentDone": false,
+      "keyFailureTag": "avoidance_admin",
+      "autoMode": "NORMAL",
+      "top3QuestIds": ["quest-sample-1", "quest-sample-2", "quest-sample-3"],
+      "updatedAt": 1740441600000
+    }
+  ],
+  "incidents": [
+    {
+      "id": "incident-sample-1",
+      "dateTime": 1740441600000,
+      "type": "SOCIAL_FRICTION",
+      "summary": "Client agressif en réunion.",
+      "severity": 3,
+      "impactedWindow": "WORK",
+      "chosenResponse": "ADAPT",
+      "createdAt": 1740441600000
+    }
+  ],
+  "quests": [
+    {
+      "id": "quest-sample-1",
+      "dateAssigned": "2026-02-25",
+      "title": "Protocole Combat Matinal",
+      "type": "TRAINING",
+      "primaryStat": "PHYSICAL",
+      "difficulty": 3,
+      "durationMin": 60,
+      "risk": "HIGH",
+      "xpReward": 90,
+      "statXPReward": { "PHYSICAL": 36, "DISCIPLINE": 10 },
+      "status": "DONE",
+      "createdBy": "SYSTEM",
+      "relatedIncidentId": null,
+      "createdAt": 1740441600000,
+      "completedAt": 1740445200000
+    },
+    {
+      "id": "quest-sample-2",
+      "dateAssigned": "2026-02-25",
+      "title": "Bloc Exécution 30 min",
+      "type": "DAILY",
+      "primaryStat": "EXECUTION",
+      "difficulty": 3,
+      "durationMin": 30,
+      "risk": "MED",
+      "xpReward": 75,
+      "statXPReward": { "EXECUTION": 36, "DISCIPLINE": 10 },
+      "status": "TODO",
+      "createdBy": "SYSTEM",
+      "relatedIncidentId": null,
+      "createdAt": 1740441600000,
+      "completedAt": null
+    },
+    {
+      "id": "quest-sample-3",
+      "dateAssigned": "2026-02-25",
+      "title": "Blitz Admin",
+      "type": "DAILY",
+      "primaryStat": "DISCIPLINE",
+      "difficulty": 2,
+      "durationMin": 20,
+      "risk": "LOW",
+      "xpReward": 40,
+      "statXPReward": { "DISCIPLINE": 34 },
+      "status": "TODO",
+      "createdBy": "SYSTEM",
+      "relatedIncidentId": null,
+      "createdAt": 1740441600000,
+      "completedAt": null
+    }
+  ],
+  "triggers": [],
+  "rules_engine": [],
+  "notifications_queue": [],
+  "loot": [],
+  "evolution_suggestions": []
+}
