@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>La doctrine — WarTime Consulting</title>
+  <meta name="description" content="59 pages. Une heure de lecture. Pourquoi les entreprises plafonnent, et comment on transforme quelque chose qui marche en quelque chose qui dure.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="La doctrine — WarTime Consulting">
+  <meta property="og:description" content="59 pages. Une heure de lecture. Ma façon de voir, en entier. Gratuit.">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="WarTime Consulting">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a class="nav__brand" href="index.html">WarTime Consulting</a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="index.html#probleme">Le problème</a></li>
+        <li><a href="index.html#methode">La méthode</a></li>
+        <li><a href="index.html#offres">Les offres</a></li>
+        <li><a href="index.html#qui">Qui je suis</a></li>
+        <li><a class="nav__cta" href="index.html#offres">Commencer</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="sec sec--dark" style="border-top:none;">
+    <div class="wrap">
+      <span class="plate mono">La doctrine</span>
+      <h2 class="reveal">Ma façon de voir, en entier. Gratuit.</h2>
+
+      <div class="doc">
+        <div class="doc__text reveal">
+          <p>59 pages. Une heure de lecture.</p>
+          <p>Pourquoi les entreprises plafonnent. Pourquoi vous ne le voyez pas de l'intérieur. Comment on transforme quelque chose qui marche en quelque chose qui dure.</p>
+          <p>Ce n'est pas une plaquette. Si ce texte ne vous parle pas, on n'est pas faits pour travailler ensemble. C'est aussi à ça qu'il sert.</p>
+
+          <!-- Formulaire minimal : prénom + email -->
+          <!-- TODO: brancher l'endpoint (Formspree / Netlify Forms) -->
+          <form class="dform" id="doctrine-form" novalidate>
+            <div class="dform__row">
+              <div class="field" style="flex:1 1 160px;">
+                <label for="d-prenom">Prénom</label>
+                <input type="text" id="d-prenom" name="prenom" autocomplete="given-name" required>
+              </div>
+              <div class="field" style="flex:2 1 220px;">
+                <label for="d-email">Email</label>
+                <input type="email" id="d-email" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <button class="btn btn--primary" type="submit">Télécharger la doctrine (PDF)</button>
+            <p class="mono dnote">Un email. Pas de relance automatique. Pas de newsletter.</p>
+          </form>
+
+          <div class="form-success" id="doctrine-success" role="status" aria-live="polite">
+            Merci. Votre lien de téléchargement s'ouvre&nbsp;: <a href="WarTime_Doctrine.pdf" download>WarTime_Doctrine.pdf</a>.
+          </div>
+        </div>
+
+        <div class="doc__aside reveal">
+          <div class="cover" role="img" aria-label="Couverture de la doctrine WarTime">
+            <span class="cover__top">Doctrine — Paris</span>
+            <div>
+              <div class="cover__title">WARTIME</div>
+              <p class="cover__sub">Transformer une activité en actif.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <span>WarTime Consulting — Paris</span>
+      <a href="mailto:contact@wartime.co">contact@wartime.co</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+    </div>
+  </footer>
+
+  <!-- TODO: déposer ici le fichier WarTime_Doctrine.pdf (seul fichier téléchargeable) -->
+  <script src="script.js"></script>
+</body>
+</html>
