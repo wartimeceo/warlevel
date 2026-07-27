@@ -59,26 +59,79 @@
     });
   }
 
-  /* ---------- Formulaires ---------- */
-  function handleForm(formId, successId, onSuccess) {
-    var form = document.getElementById(formId);
-    var success = document.getElementById(successId);
+  /* ---------- Formulaires ----------
+     Adresse de réception de tous les messages : */
+  var CONTACT_EMAIL = "wartimemail@gmail.com";
+
+  /* Envoi « propre » (le visiteur reste sur la page, le message part tout seul).
+     Laisser vide tant que Formspree n'est pas configuré : on ouvre alors la
+     messagerie du visiteur, pré-remplie vers CONTACT_EMAIL.
+     Pour activer : créer un formulaire gratuit sur formspree.io avec
+     wartimemail@gmail.com, puis coller ici le lien fourni (https://formspree.io/f/xxxxxxx). */
+  var FORM_ENDPOINT = "";
+
+  function show(form, success) {
+    form.style.display = "none";
+    success.classList.add("is-visible");
+  }
+
+  function mailtoLink(subject, body) {
+    return "mailto:" + CONTACT_EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  }
+
+  function postToEndpoint(form) {
+    return fetch(FORM_ENDPOINT, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" }
+    });
+  }
+
+  /* Formulaire CONTACT — la vraie demande. */
+  (function () {
+    var form = document.getElementById("contact-form");
+    var success = document.getElementById("contact-success");
     if (!form || !success) return;
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      // TODO: brancher l'endpoint (Formspree / Netlify Forms).
-      // Pour l'instant : confirmation en local.
-      form.style.display = "none";
-      success.classList.add("is-visible");
-      if (typeof onSuccess === "function") onSuccess();
-    });
-  }
+      if (!form.checkValidity()) { form.reportValidity(); return; }
 
-  handleForm("doctrine-form", "doctrine-success");
-  handleForm("contact-form", "contact-success");
+      var subject = "Nouveau contact — " + (form.nom.value || "");
+      var body =
+        "Nom : " + form.nom.value + "\n" +
+        "Email : " + form.email.value + "\n" +
+        "Activité : " + form.activite.value + "\n\n" +
+        "Ce qui n'avance plus aujourd'hui :\n" + form.blocage.value;
+
+      if (FORM_ENDPOINT) {
+        postToEndpoint(form)
+          .then(function () { show(form, success); })
+          .catch(function () { window.location.href = mailtoLink(subject, body); });
+      } else {
+        // Sans Formspree : on ouvre la messagerie du visiteur vers wartimemail@gmail.com
+        window.location.href = mailtoLink(subject, body);
+        success.textContent =
+          "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — je réponds sous 48 heures.";
+        show(form, success);
+      }
+    });
+  })();
+
+  /* Formulaire DOCTRINE — le visiteur veut le PDF : on le lui donne toujours.
+     Si Formspree est configuré, on capture aussi le prénom + email en arrière-plan. */
+  (function () {
+    var form = document.getElementById("doctrine-form");
+    var success = document.getElementById("doctrine-success");
+    if (!form || !success) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (FORM_ENDPOINT) { postToEndpoint(form).catch(function () {}); }
+      show(form, success);
+    });
+  })();
 })();
