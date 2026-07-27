@@ -150,6 +150,9 @@ section { position: relative; z-index: 1; }
   gap: 24px;
 }
 .nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
   font-family: var(--mono);
   text-transform: uppercase;
   letter-spacing: .22em;
@@ -157,6 +160,10 @@ section { position: relative; z-index: 1; }
   color: var(--ink);
   white-space: nowrap;
 }
+.nav__brand:hover { text-decoration: none; }
+/* Monogramme : la cote « L'écart » en miniature — la marque est la mesure. */
+.brand-mark { flex: 0 0 auto; display: block; }
+@media (max-width: 380px) { .brand-mark { display: none; } }
 .nav__links {
   display: flex;
   gap: 22px;
