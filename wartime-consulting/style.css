@@ -416,6 +416,96 @@ section { position: relative; z-index: 1; }
 }
 
 /* =========================================================
+   AUTO-DIAGNOSTIC — l'indice de dépendance
+   Interactif utile : il qualifie et mène au Diagnostic.
+   ========================================================= */
+.quiz {
+  margin: 44px 0 0;
+  display: grid;
+  gap: 26px;
+  max-width: 640px;
+  border: 0; padding: 0;
+}
+.quiz__q { border: 0; padding: 0; margin: 0; min-width: 0; }
+.quiz__q legend {
+  padding: 0;
+  font-size: 1.06rem;
+  margin-bottom: 12px;
+}
+.quiz__opts { display: flex; flex-wrap: wrap; gap: 10px; }
+.quiz__opts label { position: relative; display: inline-block; }
+.quiz__opts input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.quiz__opts span {
+  display: inline-block;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .66rem;
+  padding: 11px 18px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ink);
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+.quiz__opts label:hover span { border-color: var(--ink); }
+.quiz__opts input:checked + span {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.quiz__opts input:focus-visible + span {
+  outline: 2px solid var(--blood);
+  outline-offset: 3px;
+}
+
+.result { margin: 40px 0 0; max-width: 640px; }
+.result__gauge { position: relative; height: 12px; margin-bottom: 22px; }
+.result__track {
+  position: absolute; left: 0; right: 0; bottom: 5px;
+  height: 1px; background: var(--line);
+}
+.result__fill {
+  position: absolute; left: 0; bottom: 5px;
+  height: 1px; width: 0; background: var(--blood);
+  transition: width .5s ease;
+}
+.result__marker {
+  position: absolute; left: 0; bottom: 0;
+  width: 1px; height: 12px; background: var(--blood);
+  transition: left .5s ease;
+}
+.result__row { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.result__score {
+  font-family: var(--display);
+  font-weight: 700; font-stretch: 112%;
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  line-height: 1;
+  color: var(--blood);
+  font-variant-numeric: tabular-nums;
+}
+.result__verdict {
+  font-family: var(--display);
+  font-weight: 700; font-stretch: 112%;
+  letter-spacing: -.015em;
+  font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+  line-height: 1.1;
+  margin: 20px 0 0;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+.result__push { margin: 16px 0 22px; max-width: 46ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .result__fill, .result__marker { transition: none; }
+}
+
+/* =========================================================
    MÉTHODE — deux lectures — PL. 02
    ========================================================= */
 .two {

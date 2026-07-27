@@ -113,6 +113,75 @@
   </section>
 
   <!-- =========================================================
+       AUTO-DIAGNOSTIC — l'Indice de Dépendance
+       ========================================================= -->
+  <section class="sec" id="test">
+    <div class="wrap">
+      <span class="plate mono">Auto-diagnostic · 30 secondes</span>
+      <h2 class="reveal">Votre entreprise tourne-t-elle sans vous&nbsp;?</h2>
+      <p class="lede reveal">Cinq questions. Un chiffre&nbsp;: votre indice de dépendance. Plus il est haut, plus tout repose sur vous.</p>
+
+      <form class="quiz reveal" id="quiz" novalidate>
+        <fieldset class="quiz__q">
+          <legend>Vous pouvez partir une semaine, sans prévenir, sans que rien ne bouge&nbsp;?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q1" value="0"><span>Oui</span></label>
+            <label><input type="radio" name="q1" value="10"><span>En partie</span></label>
+            <label><input type="radio" name="q1" value="20"><span>Non</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>Les décisions importantes peuvent se prendre sans vous&nbsp;?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q2" value="0"><span>Oui</span></label>
+            <label><input type="radio" name="q2" value="10"><span>En partie</span></label>
+            <label><input type="radio" name="q2" value="20"><span>Non</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>Si vous arrêtez demain, vos revenus continuent&nbsp;?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q3" value="0"><span>Oui</span></label>
+            <label><input type="radio" name="q3" value="10"><span>En partie</span></label>
+            <label><input type="radio" name="q3" value="20"><span>Non</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>Quelqu'un d'autre pourrait tenir la maison à votre place&nbsp;?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q4" value="0"><span>Oui</span></label>
+            <label><input type="radio" name="q4" value="10"><span>En partie</span></label>
+            <label><input type="radio" name="q4" value="20"><span>Non</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>Les mêmes problèmes reviennent tous les six mois&nbsp;?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q5" value="0"><span>Non</span></label>
+            <label><input type="radio" name="q5" value="10"><span>Parfois</span></label>
+            <label><input type="radio" name="q5" value="20"><span>Oui</span></label>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="result" id="quiz-result" hidden>
+        <div class="result__gauge" aria-hidden="true">
+          <span class="result__track"></span>
+          <span class="result__fill" id="result-fill"></span>
+          <span class="result__marker" id="result-marker"></span>
+        </div>
+        <div class="result__row">
+          <span class="result__score" id="result-score" aria-live="polite">0</span>
+          <span class="result__scale mono">/ 100 — indice de dépendance</span>
+        </div>
+        <p class="result__verdict" id="result-verdict"></p>
+        <p class="result__push">Ça, c'est une estimation en cinq questions. Le vrai calcul — 35 questions et vos chiffres — c'est le Diagnostic.</p>
+        <a class="btn btn--primary" href="#offres">Faire le diagnostic — 990 €</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
        CE QUE JE FAIS — PL. 02
        ========================================================= -->
   <section class="sec" id="methode">

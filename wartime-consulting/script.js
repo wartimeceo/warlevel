@@ -134,4 +134,41 @@
       show(form, success);
     });
   })();
+
+  /* ---------- Auto-diagnostic — indice de dépendance ----------
+     Somme des réponses (0 / 10 / 20 sur 5 questions) = score 0–100.
+     Plus le score est haut, plus l'entreprise dépend du dirigeant. */
+  (function () {
+    var quiz = document.getElementById("quiz");
+    var result = document.getElementById("quiz-result");
+    if (!quiz || !result) return;
+
+    var names = ["q1", "q2", "q3", "q4", "q5"];
+
+    function verdict(score) {
+      if (score <= 30) return "Vous avez un actif. Il tourne sans vous. C'est rare — protégez-le.";
+      if (score <= 60) return "Vous avez une entreprise, mais elle penche sur vous. Un incident, et tout ralentit.";
+      return "Vous n'avez pas une entreprise. Vous avez un travail très rentable qui s'arrête quand vous vous arrêtez.";
+    }
+
+    quiz.addEventListener("change", function () {
+      var total = 0, answered = 0;
+      names.forEach(function (n) {
+        var sel = quiz.querySelector('input[name="' + n + '"]:checked');
+        if (sel) { total += parseInt(sel.value, 10); answered += 1; }
+      });
+      if (answered < names.length) return;
+
+      document.getElementById("result-score").textContent = total;
+      document.getElementById("result-fill").style.width = total + "%";
+      document.getElementById("result-marker").style.left = total + "%";
+      document.getElementById("result-verdict").textContent = verdict(total);
+
+      var first = result.hidden;
+      result.hidden = false;
+      if (first) {
+        result.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+      }
+    });
+  })();
 })();
