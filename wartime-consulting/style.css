@@ -606,9 +606,9 @@ section { position: relative; z-index: 1; }
 }
 .offer {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 6px clamp(20px, 4vw, 48px);
-  align-items: start;
+  align-items: baseline;
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
 }
@@ -621,30 +621,22 @@ section { position: relative; z-index: 1; }
   grid-column: 1;
 }
 .offer__desc {
-  grid-column: 1;
+  grid-column: 1 / -1;
   color: var(--ink);
   font-size: 1rem;
   margin-top: 6px;
   max-width: 52ch;
 }
-.offer__meta {
-  font-family: var(--mono);
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  font-size: .68rem;
-  color: var(--steel);
-  text-align: right;
-  white-space: nowrap;
-}
 .offer__price {
+  grid-column: 2;
   font-family: var(--mono);
   letter-spacing: .08em;
-  font-size: .84rem;
+  font-size: .9rem;
   color: var(--ink);
   text-align: right;
   white-space: nowrap;
 }
-.offer__cta { grid-column: 1; margin-top: 16px; }
+.offer__cta { grid-column: 1 / -1; margin-top: 16px; }
 
 /* Diagnostic mis en avant */
 .offer--feature {
@@ -669,8 +661,14 @@ section { position: relative; z-index: 1; }
   .offer {
     grid-template-columns: 1fr;
   }
-  .offer__meta, .offer__price { text-align: left; }
-  .offer__meta { margin-top: 8px; }
+  .offer__price {
+    grid-column: 1;
+    text-align: left;
+    margin-top: 4px;
+    order: 2; /* prix juste sous le nom, avant la description */
+  }
+  .offer__desc { order: 3; }
+  .offer__cta { order: 4; }
 }
 
 /* =========================================================
