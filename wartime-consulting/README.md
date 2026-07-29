@@ -14,20 +14,43 @@ wartime-consulting/
 └── script.js             Séquence du hero, révélation au scroll, formulaires
 ```
 
-## À finir avant la mise en ligne
+## Mise en ligne (Netlify) & à finir
 
-1. **Brancher les formulaires.** Deux formulaires (`#doctrine-form` et
-   `#contact-form`) affichent pour l'instant un message de succès en local.
-   Cherchez les commentaires `<!-- TODO: brancher l'endpoint -->` et pointez
-   l'attribut `action` vers Formspree ou activez Netlify Forms.
+### Déployer sur Netlify (recommandé)
 
-2. **Déposer la doctrine.** Ajoutez le fichier `WarTime_Doctrine.pdf` à côté
-   des pages. C'est le **seul** fichier téléchargeable. Ne jamais mettre en
-   ligne : protocole interne, modèle de Lecture, document d'offre et tarifs,
-   proposition de mission.
+1. Compte gratuit sur [netlify.com](https://netlify.com).
+2. **Add new site → Import from GitHub** → ce dépôt, branche
+   `claude/wartime-consulting-site-q92zsm`.
+3. Réglages de build :
+   - **Base directory** : `wartime-consulting`
+   - **Build command** : *(vide)*
+   - **Publish directory** : `wartime-consulting`
+   - (le fichier `netlify.toml` fait déjà ce réglage)
+4. **Deploy.** Le site est en ligne sur une URL `*.netlify.app`.
+5. **Domaine** : Netlify → *Domain settings* → *Add custom domain* →
+   `wartimeconsulting.fr`, puis suivre les instructions DNS chez le
+   registrar (OVH, Gandi…). HTTPS automatique.
 
-3. **Compléter les mentions légales.** Cherchez les blocs `TODO` dans
-   `mentions-legales.html` (SIRET, hébergeur, paiement, rétractation).
+> Alternative ultra-simple : glisser le dossier `wartime-consulting` sur la
+> zone *Deploy* de Netlify (pas de Git, mais mises à jour manuelles).
+
+### Les formulaires
+
+Les deux formulaires (`#contact-form`, `#doctrine-form`) sont branchés sur
+**Netlify Forms** (`data-netlify="true"`). Rien à configurer : une fois le
+site sur Netlify, chaque envoi arrive dans *Netlify → Forms*. Pour recevoir
+les demandes par email : *Forms → Notifications → Add notification →
+Email* → `wartimemail@gmail.com`.
+En local / aperçu (pas d'hébergeur), le formulaire de contact bascule sur la
+messagerie du visiteur, pré-remplie vers cette adresse.
+
+### Reste à faire
+
+- **Déposer la doctrine.** Ajoutez `WarTime_Doctrine.pdf` dans ce dossier.
+  C'est le **seul** fichier téléchargeable. Ne jamais mettre en ligne :
+  protocole interne, modèles, documents d'offre et tarifs, propositions.
+- **Compléter les mentions légales.** Blocs `TODO` dans
+  `mentions-legales.html` (SIRET, hébergeur, paiement, rétractation).
 
 ## Notes
 

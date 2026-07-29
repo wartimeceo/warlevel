@@ -348,8 +348,9 @@
           <p>Pourquoi les boîtes plafonnent. Pourquoi tu le vois pas de l'intérieur. Comment on transforme un truc qui marche en un truc qui dure.</p>
           <p>C'est pas une plaquette. Si ce texte te parle pas, on n'est pas faits pour bosser ensemble. C'est aussi à ça que ça sert.</p>
 
-          <!-- TODO: brancher l'endpoint (Formspree / Netlify Forms) -->
-          <form class="dform" id="doctrine-form" novalidate>
+          <form class="dform" id="doctrine-form" name="doctrine" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="doctrine">
+            <p class="hp" hidden><label>Ne pas remplir&nbsp;: <input name="bot-field"></label></p>
             <div class="dform__row">
               <div class="field" style="flex:1 1 160px;">
                 <label for="d-prenom">Prénom</label>
@@ -391,8 +392,9 @@
       <h2 class="reveal">Commencer</h2>
       <p class="lede reveal">Réponds à quatre questions. Je te réponds sous 48 heures. Je prends pas toutes les demandes.</p>
 
-      <!-- TODO: brancher l'endpoint (Formspree / Netlify Forms) -->
-      <form class="contact-grid reveal" id="contact-form" novalidate>
+      <form class="contact-grid reveal" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hp" hidden><label>Ne pas remplir&nbsp;: <input name="bot-field"></label></p>
         <div class="field">
           <label for="c-nom">Nom</label>
           <input type="text" id="c-nom" name="nom" autocomplete="name" required>

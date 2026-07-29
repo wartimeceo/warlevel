@@ -58,8 +58,9 @@
           <p>C'est pas une plaquette. Si ce texte te parle pas, on n'est pas faits pour bosser ensemble. C'est aussi à ça que ça sert.</p>
 
           <!-- Formulaire minimal : prénom + email -->
-          <!-- TODO: brancher l'endpoint (Formspree / Netlify Forms) -->
-          <form class="dform" id="doctrine-form" novalidate>
+          <form class="dform" id="doctrine-form" name="doctrine" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="doctrine">
+            <p class="hp" hidden><label>Ne pas remplir&nbsp;: <input name="bot-field"></label></p>
             <div class="dform__row">
               <div class="field" style="flex:1 1 160px;">
                 <label for="d-prenom">Prénom</label>

@@ -1,0 +1,6 @@
+# Config Netlify — site statique, aucun build.
+# Sur Netlify, régler la « Base directory » sur wartime-consulting :
+# ce fichier fait le reste (publie le dossier tel quel).
+[build]
+  publish = "."
+  command = ""
