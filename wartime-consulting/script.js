@@ -105,6 +105,7 @@
         "Email : " + form.email.value + "\n" +
         "Activité : " + form.activite.value + "\n\n" +
         "Ce qui n'avance plus aujourd'hui :\n" + form.blocage.value;
+      // (message pré-rempli vers wartimemail@gmail.com)
 
       if (FORM_ENDPOINT) {
         postToEndpoint(form)
@@ -114,7 +115,7 @@
         // Sans Formspree : on ouvre la messagerie du visiteur vers wartimemail@gmail.com
         window.location.href = mailtoLink(subject, body);
         success.textContent =
-          "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — je réponds sous 48 heures.";
+          "Ton message est prêt dans ta messagerie. Clique sur Envoyer — je te réponds sous 48 heures.";
         show(form, success);
       }
     });
@@ -146,9 +147,9 @@
     var names = ["q1", "q2", "q3", "q4", "q5"];
 
     function verdict(score) {
-      if (score <= 30) return "Vous avez un actif. Il tourne sans vous. C'est rare — protégez-le.";
-      if (score <= 60) return "Vous avez une entreprise, mais elle penche sur vous. Un incident, et tout ralentit.";
-      return "Vous n'avez pas une entreprise. Vous avez un travail très rentable qui s'arrête quand vous vous arrêtez.";
+      if (score <= 30) return "T'as un actif. Il tourne sans toi. C'est rare — protège-le.";
+      if (score <= 60) return "T'as une entreprise, mais elle penche sur toi. Un coup dur, et tout ralentit.";
+      return "T'as pas une entreprise. T'as un job très rentable qui s'arrête le jour où tu t'arrêtes.";
     }
 
     quiz.addEventListener("change", function () {

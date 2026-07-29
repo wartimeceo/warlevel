@@ -676,6 +676,16 @@ section { position: relative; z-index: 1; }
    ========================================================= */
 .bio { max-width: 58ch; margin: 40px 0; }
 .bio p { margin: 0 0 20px; }
+.bio__close {
+  max-width: 40ch;
+  font-family: var(--display);
+  font-weight: 700;
+  font-stretch: 112%;
+  letter-spacing: -.01em;
+  line-height: 1.12;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  margin: 0 0 34px;
+}
 
 .quote {
   max-width: 24ch;
