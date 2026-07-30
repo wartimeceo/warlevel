@@ -5,12 +5,12 @@
    ========================================================= */
 
 :root {
-  --ink:    #14161B; /* texte, fonds sombres — graphite */
-  --paper:  #EFEDE7; /* fond principal — os */
-  --steel:  #6E7C89; /* annotations, texte secondaire */
-  --blood:  #8E2B20; /* accent UNIQUE */
-  --line:   rgba(20, 22, 27, .14);
-  --line-dark: rgba(239, 237, 231, .16);
+  --ink:    #14231C; /* texte, fonds sombres — vert bouteille profond */
+  --paper:  #F5F7F3; /* fond principal — blanc légèrement vert */
+  --steel:  #6E7B73; /* annotations, texte secondaire — vert-gris */
+  --blood:  #1A6E4A; /* accent UNIQUE — vert bouteille */
+  --line:   rgba(20, 35, 28, .14);
+  --line-dark: rgba(245, 247, 243, .16);
 
   --maxw: 1120px;
   --gut: clamp(20px, 5vw, 64px);
@@ -111,8 +111,8 @@ section { position: relative; z-index: 1; }
   color: var(--paper);
   border-top: 1px solid var(--line-dark);
 }
-.sec--dark .mono { color: #9aa6b0; }
-.sec--dark a { color: #d98c80; }
+.sec--dark .mono { color: #9DB0A5; }
+.sec--dark a { color: #86C9A6; }
 
 /* Label de planche */
 .plate {
@@ -120,7 +120,7 @@ section { position: relative; z-index: 1; }
   margin-bottom: 28px;
   color: var(--blood);
 }
-.sec--dark .plate { color: #d98c80; }
+.sec--dark .plate { color: #86C9A6; }
 
 .lede {
   max-width: 46ch;
@@ -247,7 +247,7 @@ section { position: relative; z-index: 1; }
   border-color: var(--blood);
   color: var(--paper);
 }
-.btn--primary:hover { background: #741f16; border-color: #741f16; }
+.btn--primary:hover { background: #124D34; border-color: #124D34; }
 
 .btn--ghost {
   background: transparent;
@@ -653,7 +653,7 @@ section { position: relative; z-index: 1; }
   font-stretch: 112%;
   font-size: clamp(1.4rem, 3vw, 2rem);
 }
-.band span { color: #c9cfd4; max-width: 40ch; }
+.band span { color: #CBD8CF; max-width: 40ch; }
 
 @media (max-width: 640px) {
   .steps { grid-template-columns: 1fr; }
@@ -833,7 +833,7 @@ section { position: relative; z-index: 1; }
   height: 1px;
   background: var(--blood);
 }
-.cover__top { font-family: var(--mono); letter-spacing: .2em; font-size: .58rem; color: #9aa6b0; }
+.cover__top { font-family: var(--mono); letter-spacing: .2em; font-size: .58rem; color: #9DB0A5; }
 .cover__title {
   font-family: var(--display);
   font-weight: 700;
@@ -842,7 +842,7 @@ section { position: relative; z-index: 1; }
   font-size: clamp(1.8rem, 5vw, 2.6rem);
   color: var(--paper);
 }
-.cover__sub { font-family: var(--serif); font-style: italic; color: #c9cfd4; font-size: .98rem; }
+.cover__sub { font-family: var(--serif); font-style: italic; color: #CBD8CF; font-size: .98rem; }
 
 /* Formulaire doctrine */
 .dform { margin-top: 26px; }
@@ -914,7 +914,7 @@ section { position: relative; z-index: 1; }
   font-size: 1.2rem;
 }
 .form-success.is-visible { display: block; }
-.sec--dark .form-success { border-color: #d98c80; }
+.sec--dark .form-success { border-color: #86C9A6; }
 
 /* =========================================================
    PIED DE PAGE

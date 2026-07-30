@@ -1,0 +1,41 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 330 >>
+stream
+BT /F1 40 Tf 70 720 Td (WARTIME) Tj ET
+BT /F2 14 Tf 70 690 Td (Direction strategique - Paris) Tj ET
+0.557 0.169 0.125 RG 2 w 70 675 m 300 675 l S
+BT /F1 22 Tf 70 620 Td (Doctrine) Tj ET
+BT /F2 13 Tf 70 590 Td (Version de travail - a remplacer par le PDF final.) Tj ET
+BT /F2 13 Tf 70 566 Td (59 pages. Une heure de lecture.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000632 00000 n 
+0000000707 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+777
+%%EOF
