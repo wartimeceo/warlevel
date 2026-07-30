@@ -463,6 +463,10 @@ section { position: relative; z-index: 1; }
   outline: 2px solid var(--blood);
   outline-offset: 3px;
 }
+.quiz__opts input:disabled + span {
+  opacity: .38;
+  cursor: not-allowed;
+}
 
 .result { margin: 40px 0 0; max-width: 640px; }
 .result__gauge { position: relative; height: 12px; margin-bottom: 22px; }

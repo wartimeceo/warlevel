@@ -159,87 +159,121 @@
       scaler: "changer de dimension",
       vivre: "bien vivre de votre activité"
     };
-    var JOUR = { produire: "produire", vendre: "vendre", ops: "gérer l'opérationnel", piloter: "piloter" };
 
+    function has(arr, x) { return arr && arr.indexOf(x) !== -1; }
     function val(name) {
       var el = form.querySelector('input[name="' + name + '"]:checked');
       return el ? el.value : null;
     }
+    function multi(name) {
+      return Array.prototype.map.call(
+        form.querySelectorAll('input[name="' + name + '"]:checked'),
+        function (el) { return el.value; }
+      );
+    }
 
-    /* Lecture 1 — alignement du patron : ambition déclarée vs journées réelles. */
-    function readAlignement(a, j) {
-      if (j === "piloter")
+    /* Limite les questions multi-choix à 2 réponses (désactive le reste). */
+    Array.prototype.forEach.call(form.querySelectorAll(".quiz__q--multi"), function (g) {
+      var max = parseInt(g.getAttribute("data-max") || "2", 10);
+      var boxes = g.querySelectorAll('input[type="checkbox"]');
+      g.addEventListener("change", function () {
+        var n = g.querySelectorAll('input[type="checkbox"]:checked').length;
+        Array.prototype.forEach.call(boxes, function (b) {
+          if (!b.checked) b.disabled = (n >= max);
+        });
+      });
+    });
+
+    /* Lecture 1 — alignement : ambition déclarée vs rôle réel au quotidien. */
+    function readAlignement(a, jours) {
+      var prod = has(jours, "produire"), ops = has(jours, "ops"),
+          pil = has(jours, "piloter"), vend = has(jours, "vendre");
+      if (pil && !prod && !ops)
         return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là que je regarde.";
-      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (j === "produire" || j === "ops"))
-        return "Désaligné. Vous voulez " + AMB[a] + ", mais vos journées, c'est " + JOUR[j] + ". Tant que tout passe par vos mains, vous ne construisez pas une entreprise — vous vous êtes créé un job. C'est ça qui vous tient au plafond.";
-      if (a === "vivre" && (j === "produire" || j === "ops"))
+      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (prod || ops)) {
+        var quoi = prod ? "vous produisez encore vous-même" : "vous gérez encore l'opérationnel vous-même";
+        return "Désaligné. Vous voulez " + AMB[a] + ", mais " + quoi + ". Tant que tout passe par vos mains, vous vous êtes créé un job, pas une entreprise. C'est ça qui vous tient au plafond.";
+      }
+      if (a === "vivre" && (prod || ops))
         return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et je parie que vous le sentez déjà venir.";
-      if (j === "vendre")
+      if (vend && !prod && !ops)
         return "Vous passez vos journées à vendre. Ça remplit la caisse — mais si c'est vous seul qui vendez, l'entreprise s'arrête avec vous.";
       return "Votre ambition et vos journées se tiennent à peu près. Le désalignement est plus fin — c'est là que ma vraie lecture creuse.";
     }
 
-    /* Lecture 2 — le premier domino : prospect / message / promesse via les chiffres. */
+    /* Lecture 2 — le premier domino, lu dans les chiffres. */
     function readDomino(v) {
-      var aud = +v.q3, ventes = +v.q4, conv = +v.q5, ret = +v.q6, prix = +v.q7, canal = v.q8, amb = v.q1;
+      var aud = +v.q3, ca = +v.q4, marge = v.q5, conv = v.q6, fid = v.q7,
+          panier = +v.q8, canaux = v.q9, amb = v.q1;
       var veutGrandir = (amb === "scaler" || amb === "sansmoi" || amb === "marque");
-      if (aud >= 2 && (ventes <= 1 || conv <= 1))
-        return "Vous avez l'attention, pas la vente. Grosse audience, faibles ventes — vous parlez aux mauvaises personnes, ou vous leur promettez le mauvais truc. Ce n'est PAS un problème d'audience.";
-      if (conv >= 2 && ret === 0)
+      var actif = has(canaux, "reseaux") || has(canaux, "demarche");
+
+      if (ca >= 2 && marge === "0")
+        return "Gros chiffre, marge écrasée. Vous travaillez pour le décor : le vrai blocage, c'est votre modèle et vos coûts — pas votre volume.";
+      if (marge === "nsp")
+        return "Vous ne connaissez pas votre marge nette. C'est le premier chiffre à tenir : sans lui, vous pilotez à l'aveugle. On commence par là.";
+      if (aud >= 2 && (ca <= 1 || conv === "0" || conv === "nsp"))
+        return "Vous avez l'attention, pas la vente. Beaucoup de monde vous découvre, peu achètent — vous parlez aux mauvaises personnes, ou vous leur promettez le mauvais truc. Ce n'est PAS un problème d'audience.";
+      if ((conv === "2" || conv === "3") && (fid === "0" || fid === "nsp"))
         return "Vous convertissez, mais personne ne revient. Votre promesse dépasse votre produit, ou vous vendez à des gens de passage. Vous remplissez un seau percé.";
-      if ((amb === "scaler" || amb === "sansmoi") && prix <= 1)
-        return "Vous voulez grossir, mais à ce prix il vous faut un volume énorme. Le blocage, c'est votre offre — montez en gamme ou changez de modèle.";
-      if (veutGrandir && canal === "rien")
+      if ((amb === "scaler" || amb === "sansmoi") && panier <= 1)
+        return "Vous voulez grossir, mais à ce panier il vous faut un volume énorme. Le blocage, c'est votre offre — montez en gamme ou changez de modèle.";
+      if (veutGrandir && has(canaux, "rien") && !actif)
         return "Vous voulez que ça grossisse, mais rien ne va chercher le client. Vous attendez. On ne passe pas un cap en attendant.";
-      if (veutGrandir && (canal === "boa" || canal === "passage"))
+      if (veutGrandir && !actif && (has(canaux, "boa") || has(canaux, "passage")))
         return "Vous dépendez d'un canal que vous ne contrôlez pas — le bouche-à-oreille, le passage. Pour changer de dimension, il vous faut un canal que VOUS actionnez.";
-      if (aud <= 1 && ventes <= 1)
+      if (aud <= 1 && ca <= 1)
         return "Vous n'avez pas encore de signal clair. Avant d'optimiser quoi que ce soit, il vous faut UN canal qui ramène, répétable. Le reste vient après.";
       return "Vos fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que ma lecture complète rentre dans le détail.";
     }
 
     /* Le titre : le signal le plus fort, en une phrase. */
-    function headline(a, j, v) {
-      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (j === "produire" || j === "ops"))
+    function headline(a, jours, v) {
+      var prod = has(jours, "produire"), ops = has(jours, "ops");
+      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (prod || ops))
         return "Vous vous êtes créé un job, pas une entreprise.";
-      if (+v.q3 >= 2 && (+v.q4 <= 1 || +v.q5 <= 1)) return "Vous avez l'attention. Pas la vente.";
-      if (+v.q5 >= 2 && +v.q6 === 0) return "Vous remplissez un seau percé.";
+      if (+v.q4 >= 2 && v.q5 === "0") return "Vous travaillez pour le décor.";
+      if (v.q5 === "nsp") return "Vous pilotez à l'aveugle.";
+      if (+v.q3 >= 2 && (+v.q4 <= 1 || v.q6 === "0" || v.q6 === "nsp")) return "Vous avez l'attention. Pas la vente.";
+      if ((v.q6 === "2" || v.q6 === "3") && (v.q7 === "0" || v.q7 === "nsp")) return "Vous remplissez un seau percé.";
       if (+v.q3 <= 1 && +v.q4 <= 1) return "Pas encore de signal. Il vous faut un canal.";
       return "Les fondations tiennent. Le levier est ailleurs.";
     }
 
     var hint = document.getElementById("lr-hint");
+    var radios = ["q1", "q3", "q4", "q5", "q6", "q7", "q8", "q10"];
+    var groups = ["q2", "q9"];
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var need = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9"];
-      var missing = null;
-      for (var i = 0; i < need.length; i++) {
-        if (!val(need[i])) { missing = need[i]; break; }
-      }
+
+      var missing = null, i;
+      for (i = 0; i < radios.length; i++) { if (!val(radios[i])) { missing = radios[i]; break; } }
+      if (!missing) { for (i = 0; i < groups.length; i++) { if (multi(groups[i]).length === 0) { missing = groups[i]; break; } } }
+
       if (missing) {
         if (hint) hint.hidden = false;
-        var fs = form.querySelector('input[name="' + missing + '"]');
-        if (fs && fs.closest) {
-          var block = fs.closest("fieldset");
-          if (block) block.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-        }
+        var el = form.querySelector('[name="' + missing + '"]');
+        var block = el && el.closest ? el.closest("fieldset") : null;
+        if (block) block.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
         return;
       }
       if (hint) hint.hidden = true;
 
       var v = {};
-      need.forEach(function (n) { v[n] = val(n); });
-      var textEl = form.querySelector('[name="q10"]');
-      v.q10 = textEl ? textEl.value : "";
+      radios.forEach(function (n) { v[n] = val(n); });
+      v.q2 = multi("q2");
+      v.q9 = multi("q9");
+      var textEl = form.querySelector('[name="q11"]');
+      v.q11 = textEl ? textEl.value : "";
 
       document.getElementById("lr-headline").textContent = headline(v.q1, v.q2, v);
       document.getElementById("lr-align").textContent = readAlignement(v.q1, v.q2);
       document.getElementById("lr-domino").textContent = readDomino(v);
 
       var echo = document.getElementById("lr-echo");
-      if (v.q10 && v.q10.trim()) {
-        echo.textContent = "Vous dites vendre : « " + v.q10.trim() + " ». On verra si vos chiffres racontent la même histoire.";
+      if (v.q11 && v.q11.trim()) {
+        echo.textContent = "Vous ciblez : « " + v.q11.trim() + " ». On verra si vos chiffres racontent la même histoire.";
         echo.hidden = false;
       } else {
         echo.hidden = true;
