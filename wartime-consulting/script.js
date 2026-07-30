@@ -119,7 +119,7 @@
             "Ce qui n'avance plus aujourd'hui :\n" + form.blocage.value;
           window.location.href = mailtoLink(subject, body);
           success.textContent =
-            "Ton message est prêt dans ta messagerie. Clique sur Envoyer — je te réponds sous 48 heures.";
+            "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — je vous réponds sous 48 heures.";
           show(form, success);
         });
     });
@@ -154,10 +154,10 @@
     if (STRIPE_LINK) document.getElementById("lr-pay").setAttribute("href", STRIPE_LINK);
 
     var AMB = {
-      sansmoi: "une boîte qui tourne sans toi",
+      sansmoi: "une entreprise qui tourne sans vous",
       marque: "devenir une référence",
-      scaler: "scaler",
-      vivre: "bien vivre de ton truc"
+      scaler: "changer de dimension",
+      vivre: "bien vivre de votre activité"
     };
     var JOUR = { produire: "produire", vendre: "vendre", ops: "gérer l'opérationnel", piloter: "piloter" };
 
@@ -169,39 +169,42 @@
     /* Lecture 1 — alignement du patron : ambition déclarée vs journées réelles. */
     function readAlignement(a, j) {
       if (j === "piloter")
-        return "Bonne posture : tu pilotes, tu fais pas tout toi-même. Reste à voir si la machine derrière suit vraiment — c'est là que je regarde.";
+        return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là que je regarde.";
       if ((a === "sansmoi" || a === "scaler" || a === "marque") && (j === "produire" || j === "ops"))
-        return "Désaligné. Tu veux " + AMB[a] + ", mais tes journées, c'est " + JOUR[j] + ". Tant que tout passe par tes mains, tu construis pas une entreprise — tu t'es créé un job. C'est ça qui te tient au plafond.";
+        return "Désaligné. Vous voulez " + AMB[a] + ", mais vos journées, c'est " + JOUR[j] + ". Tant que tout passe par vos mains, vous ne construisez pas une entreprise — vous vous êtes créé un job. C'est ça qui vous tient au plafond.";
       if (a === "vivre" && (j === "produire" || j === "ops"))
-        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et je parie que tu le sens déjà venir.";
+        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et je parie que vous le sentez déjà venir.";
       if (j === "vendre")
-        return "Tu passes tes journées à vendre. Ça remplit la caisse — mais si c'est QUE toi qui vends, la boîte s'arrête avec toi.";
-      return "Ton ambition et tes journées se tiennent à peu près. Le désalignement est plus fin — c'est là que ma vraie lecture creuse.";
+        return "Vous passez vos journées à vendre. Ça remplit la caisse — mais si c'est vous seul qui vendez, l'entreprise s'arrête avec vous.";
+      return "Votre ambition et vos journées se tiennent à peu près. Le désalignement est plus fin — c'est là que ma vraie lecture creuse.";
     }
 
     /* Lecture 2 — le premier domino : prospect / message / promesse via les chiffres. */
     function readDomino(v) {
-      var aud = +v.q3, ventes = +v.q4, conv = +v.q5, ret = +v.q6, prix = +v.q7, prosp = +v.q8, amb = v.q1;
+      var aud = +v.q3, ventes = +v.q4, conv = +v.q5, ret = +v.q6, prix = +v.q7, canal = v.q8, amb = v.q1;
+      var veutGrandir = (amb === "scaler" || amb === "sansmoi" || amb === "marque");
       if (aud >= 2 && (ventes <= 1 || conv <= 1))
-        return "T'as l'attention, pas la vente. Grosse audience, faibles ventes — tu parles aux mauvaises personnes, ou tu leur promets le mauvais truc. C'est PAS un problème d'audience.";
+        return "Vous avez l'attention, pas la vente. Grosse audience, faibles ventes — vous parlez aux mauvaises personnes, ou vous leur promettez le mauvais truc. Ce n'est PAS un problème d'audience.";
       if (conv >= 2 && ret === 0)
-        return "Tu convertis, mais personne revient. Ta promesse dépasse ton produit, ou tu vends à des gens de passage. Tu remplis un seau percé.";
+        return "Vous convertissez, mais personne ne revient. Votre promesse dépasse votre produit, ou vous vendez à des gens de passage. Vous remplissez un seau percé.";
       if ((amb === "scaler" || amb === "sansmoi") && prix <= 1)
-        return "Tu veux grossir, mais à ce prix il te faut un volume de dingue. Le blocage, c'est ton offre — monte en gamme ou change de modèle.";
-      if ((amb === "scaler" || amb === "sansmoi" || amb === "marque") && prosp === 0)
-        return "Tu veux que ça grossisse, mais tu vas pas chercher le client. Tu attends qu'on vienne. Tu veux le résultat sans le geste.";
+        return "Vous voulez grossir, mais à ce prix il vous faut un volume énorme. Le blocage, c'est votre offre — montez en gamme ou changez de modèle.";
+      if (veutGrandir && canal === "rien")
+        return "Vous voulez que ça grossisse, mais rien ne va chercher le client. Vous attendez. On ne passe pas un cap en attendant.";
+      if (veutGrandir && (canal === "boa" || canal === "passage"))
+        return "Vous dépendez d'un canal que vous ne contrôlez pas — le bouche-à-oreille, le passage. Pour changer de dimension, il vous faut un canal que VOUS actionnez.";
       if (aud <= 1 && ventes <= 1)
-        return "T'as pas encore de signal clair. Avant d'optimiser quoi que ce soit, il te faut UN canal qui ramène, répétable. Le reste vient après.";
-      return "Tes fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que ma lecture complète rentre dans le détail.";
+        return "Vous n'avez pas encore de signal clair. Avant d'optimiser quoi que ce soit, il vous faut UN canal qui ramène, répétable. Le reste vient après.";
+      return "Vos fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que ma lecture complète rentre dans le détail.";
     }
 
     /* Le titre : le signal le plus fort, en une phrase. */
     function headline(a, j, v) {
       if ((a === "sansmoi" || a === "scaler" || a === "marque") && (j === "produire" || j === "ops"))
-        return "Tu t'es créé un job, pas une entreprise.";
-      if (+v.q3 >= 2 && (+v.q4 <= 1 || +v.q5 <= 1)) return "T'as l'attention. Pas la vente.";
-      if (+v.q5 >= 2 && +v.q6 === 0) return "Tu remplis un seau percé.";
-      if (+v.q3 <= 1 && +v.q4 <= 1) return "Pas encore de signal. Faut un canal.";
+        return "Vous vous êtes créé un job, pas une entreprise.";
+      if (+v.q3 >= 2 && (+v.q4 <= 1 || +v.q5 <= 1)) return "Vous avez l'attention. Pas la vente.";
+      if (+v.q5 >= 2 && +v.q6 === 0) return "Vous remplissez un seau percé.";
+      if (+v.q3 <= 1 && +v.q4 <= 1) return "Pas encore de signal. Il vous faut un canal.";
       return "Les fondations tiennent. Le levier est ailleurs.";
     }
 
@@ -236,7 +239,7 @@
 
       var echo = document.getElementById("lr-echo");
       if (v.q10 && v.q10.trim()) {
-        echo.textContent = "Tu dis vendre : « " + v.q10.trim() + " ». On verra si tes chiffres racontent la même histoire.";
+        echo.textContent = "Vous dites vendre : « " + v.q10.trim() + " ». On verra si vos chiffres racontent la même histoire.";
         echo.hidden = false;
       } else {
         echo.hidden = true;
