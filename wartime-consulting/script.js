@@ -119,7 +119,7 @@
             "Ce qui n'avance plus aujourd'hui :\n" + form.blocage.value;
           window.location.href = mailtoLink(subject, body);
           success.textContent =
-            "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — je vous réponds sous 48 heures.";
+            "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — on vous répond sous 48 heures.";
           show(form, success);
         });
     });
@@ -189,16 +189,16 @@
       var prod = has(jours, "produire"), ops = has(jours, "ops"),
           pil = has(jours, "piloter"), vend = has(jours, "vendre");
       if (pil && !prod && !ops)
-        return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là que je regarde.";
+        return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là qu'on regarde.";
       if ((a === "sansmoi" || a === "scaler" || a === "marque") && (prod || ops)) {
         var quoi = prod ? "vous produisez encore vous-même" : "vous gérez encore l'opérationnel vous-même";
         return "Désaligné. Vous voulez " + AMB[a] + ", mais " + quoi + ". Tant que tout passe par vos mains, vous vous êtes créé un job, pas une entreprise. C'est ça qui vous tient au plafond.";
       }
       if (a === "vivre" && (prod || ops))
-        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et je parie que vous le sentez déjà venir.";
+        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et on parie que vous le sentez déjà venir.";
       if (vend && !prod && !ops)
         return "Vous passez vos journées à vendre. Ça remplit la caisse — mais si c'est vous seul qui vendez, l'entreprise s'arrête avec vous.";
-      return "Votre ambition et vos journées se tiennent à peu près. Le désalignement est plus fin — c'est là que ma vraie lecture creuse.";
+      return "Votre ambition et vos journées se tiennent à peu près. Le désalignement est plus fin — c'est là que notre vraie lecture creuse.";
     }
 
     /* Lecture 2 — le premier domino, lu dans les chiffres. */
@@ -224,7 +224,7 @@
         return "Vous dépendez d'un canal que vous ne contrôlez pas — le bouche-à-oreille, le passage. Pour changer de dimension, il vous faut un canal que VOUS actionnez.";
       if (aud <= 1 && ca <= 1)
         return "Vous n'avez pas encore de signal clair. Avant d'optimiser quoi que ce soit, il vous faut UN canal qui ramène, répétable. Le reste vient après.";
-      return "Vos fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que ma lecture complète rentre dans le détail.";
+      return "Vos fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que notre lecture complète rentre dans le détail.";
     }
 
     /* Le titre : le signal le plus fort, en une phrase. */
