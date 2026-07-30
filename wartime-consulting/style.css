@@ -579,7 +579,7 @@ section { position: relative; z-index: 1; }
   margin: 44px 0;
 }
 .two__block {
-  border-top: 2px solid var(--ink);
+  border-top: 2px solid var(--blood);
   padding-top: 20px;
 }
 .two__block .mono { display: block; margin-bottom: 14px; }
@@ -652,6 +652,7 @@ section { position: relative; z-index: 1; }
   font-weight: 700;
   font-stretch: 112%;
   font-size: clamp(1.4rem, 3vw, 2rem);
+  color: #86C9A6;
 }
 .band span { color: #CBD8CF; max-width: 40ch; }
 
@@ -695,8 +696,8 @@ section { position: relative; z-index: 1; }
   grid-column: 2;
   font-family: var(--mono);
   letter-spacing: .08em;
-  font-size: .9rem;
-  color: var(--ink);
+  font-size: .95rem;
+  color: var(--blood);
   text-align: right;
   white-space: nowrap;
 }
