@@ -153,13 +153,6 @@
     var STRIPE_LINK = "";
     if (STRIPE_LINK) document.getElementById("lr-pay").setAttribute("href", STRIPE_LINK);
 
-    var AMB = {
-      sansmoi: "une entreprise qui tourne sans vous",
-      marque: "devenir une référence",
-      scaler: "changer de dimension",
-      vivre: "bien vivre de votre activité"
-    };
-
     function has(arr, x) { return arr && arr.indexOf(x) !== -1; }
     function val(name) {
       var el = form.querySelector('input[name="' + name + '"]:checked');
@@ -184,61 +177,132 @@
       });
     });
 
-    /* Lecture 1 — alignement : ambition déclarée vs rôle réel au quotidien. */
-    function readAlignement(a, jours) {
-      var prod = has(jours, "produire"), ops = has(jours, "ops"),
-          pil = has(jours, "piloter"), vend = has(jours, "vendre");
-      if (pil && !prod && !ops)
-        return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là que nous regardons.";
-      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (prod || ops)) {
-        var quoi = prod ? "vous produisez encore vous-même" : "vous gérez encore l'opérationnel vous-même";
-        return "Désaligné. Vous voulez " + AMB[a] + ", mais " + quoi + ". Tant que tout passe par vos mains, vous vous êtes créé un job, pas une entreprise. C'est ça qui vous tient au plafond.";
-      }
-      if (a === "vivre" && (prod || ops))
-        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et nous parions que vous le sentez déjà venir.";
-      if (vend && !prod && !ops)
-        return "Vous passez vos journées à vendre. Ça remplit la caisse — mais si c'est vous seul qui vendez, l'entreprise s'arrête avec vous.";
-      return "Votre ambition et vos journées se tiennent à peu près. Le désalignement est plus fin — c'est là que notre vraie lecture creuse.";
+    /* =====================================================================
+       Moteur WarTime — nous ne cherchons pas ce qui ne fonctionne pas,
+       nous cherchons ce qui se contredit. Chaque lecture raconte une
+       histoire en quatre temps :
+         1. Ce que vous cherchez à construire  (l'ambition)
+         2. Ce que vos réponses racontent       (la contradiction)
+         3. Ce que cela produit                 (la conséquence)
+         4. Ce que nous regarderions ensuite    (la suite, honnête)
+       + la maturité du système : dépendante → structurée → scalable.
+       ===================================================================== */
+
+    /* Ce que vous cherchez à construire — l'ambition, reformulée. */
+    function poursuit(v) {
+      return {
+        sansmoi: "Une entreprise qui tourne sans vous.",
+        marque:  "Une marque, une référence dans votre secteur.",
+        scaler:  "Changer d'échelle, franchir un vrai palier.",
+        vivre:   "Une activité qui vous fait vivre sereinement."
+      }[v.q1] || "Passer votre prochain cap.";
     }
 
-    /* Lecture 2 — le premier domino, lu dans les chiffres. */
-    function readDomino(v) {
+    /* La contradiction dominante — le cœur de la lecture. Première vraie
+       incohérence détectée, de la plus viscérale à la plus fine. Renvoie
+       { racontent, produit, suite }. */
+    function readContradiction(v) {
+      var jours = v.q2, prod = has(jours, "produire"), ops = has(jours, "ops");
       var aud = +v.q3, ca = +v.q4, marge = v.q5, conv = v.q6, fid = v.q7,
           panier = +v.q8, canaux = v.q9, amb = v.q1;
       var veutGrandir = (amb === "scaler" || amb === "sansmoi" || amb === "marque");
       var actif = has(canaux, "reseaux") || has(canaux, "demarche");
+      var vise = poursuit(v).toLowerCase().replace(/\.$/, "");
 
-      if (ca >= 2 && marge === "0")
-        return "Gros chiffre, marge écrasée. Vous travaillez pour le décor : le vrai blocage, c'est votre modèle et vos coûts — pas votre volume.";
-      if (marge === "nsp")
-        return "Vous ne connaissez pas votre marge nette. C'est le premier chiffre à tenir : sans lui, vous pilotez à l'aveugle. Nous commençons par là.";
-      if (aud >= 2 && (ca <= 1 || conv === "0" || conv === "nsp"))
-        return "Vous avez l'attention, pas la vente. Beaucoup de monde vous découvre, peu achètent — vous parlez aux mauvaises personnes, ou vous leur promettez le mauvais truc. Ce n'est PAS un problème d'audience.";
-      if ((conv === "2" || conv === "3") && (fid === "0" || fid === "nsp"))
-        return "Vous convertissez, mais personne ne revient. Votre promesse dépasse votre produit, ou vous vendez à des gens de passage. Vous remplissez un seau percé.";
-      if ((amb === "scaler" || amb === "sansmoi") && panier <= 1)
-        return "Vous voulez grossir, mais à ce panier il vous faut un volume énorme. Le blocage, c'est votre offre — montez en gamme ou changez de modèle.";
-      if (veutGrandir && has(canaux, "rien") && !actif)
-        return "Vous voulez que ça grossisse, mais rien ne va chercher le client. Vous attendez. Nous ne passons pas un cap en attendant.";
-      if (veutGrandir && !actif && (has(canaux, "boa") || has(canaux, "passage")))
-        return "Vous dépendez d'un canal que vous ne contrôlez pas — le bouche-à-oreille, le passage. Pour changer de dimension, il vous faut un canal que VOUS actionnez.";
-      if (aud <= 1 && ca <= 1)
-        return "Vous n'avez pas encore de signal clair. Avant d'optimiser quoi que ce soit, il vous faut UN canal qui ramène, répétable. Le reste vient après.";
-      return "Vos fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que notre lecture complète rentre dans le détail.";
+      // 1. Le fondateur contredit l'entreprise qu'il dit vouloir.
+      if (veutGrandir && (prod || ops)) {
+        var fait = [];
+        if (prod) fait.push("vous produisez encore");
+        if (ops) fait.push("vous gérez l'opérationnel");
+        fait.push("vous gardez les décisions");
+        var liste = fait.join(", ").replace(/,([^,]*)$/, " et$1");
+        return {
+          racontent: "Vous dites viser « " + vise + " ». Pourtant, " + liste +
+            ". Aujourd'hui, votre organisation raconte l'inverse de votre ambition.",
+          produit: "Vous travaillez davantage chaque année sans créer davantage de liberté. Votre croissance reste plafonnée par votre présence.",
+          suite: "Votre organisation, votre acquisition et votre modèle — pour comprendre d'où vient cette dépendance, et concevoir le système qui s'en libère."
+        };
+      }
+      // 2. Le chiffre d'affaires contredit la marge.
+      if (ca >= 2 && marge === "0") {
+        return {
+          racontent: "Votre chiffre d'affaires dit que ça marche. Votre marge dit le contraire. Les deux ne peuvent pas avoir raison en même temps.",
+          produit: "Vous produisez du volume, pas de la valeur. Plus vous grossissez à ce rythme, plus l'écart se creuse.",
+          suite: "Votre structure de coûts et votre modèle de prix — pour voir précisément où la valeur se perd."
+        };
+      }
+      // 3. Le discours contredit les données : vous dirigez sans voir.
+      if (marge === "nsp") {
+        return {
+          racontent: "Vous savez où vous voulez aller, mais vous ne connaissez pas votre marge nette. Vous dirigez sur un tableau de bord auquel il manque l'aiguille principale.",
+          produit: "Chaque décision se prend à l'estime. Certaines vous coûtent sans que vous le voyiez.",
+          suite: "Vos chiffres réels — pour remettre l'aiguille et décider sur du concret, pas sur une impression."
+        };
+      }
+      // 4. Les ventes contredisent l'audience.
+      if (aud >= 2 && (ca <= 1 || conv === "0" || conv === "nsp")) {
+        return {
+          racontent: "Votre audience grandit. Vos ventes, non. Ce que vous publiez attire — mais pas ceux qui achètent.",
+          produit: "Vous alimentez une audience venue pour du gratuit. L'attention monte ; la valeur créée ne se transforme pas en revenus.",
+          suite: "Votre offre et votre proposition de valeur — parce que le prochain cap n'est pas plus de contenu, c'est une offre qui convertit."
+        };
+      }
+      // 5. La conversion contredit la rétention : le réservoir percé.
+      if ((conv === "2" || conv === "3") && (fid === "0" || fid === "nsp")) {
+        return {
+          racontent: "Vous convertissez, mais personne ne revient. Votre acquisition fonctionne ; votre entreprise, elle, ne retient pas la valeur qu'elle crée.",
+          produit: "Vous remplissez un réservoir percé : chaque mois repart de zéro, et la croissance coûte de plus en plus cher.",
+          suite: "Votre produit et votre expérience après l'achat — là où se joue vraiment la rétention."
+        };
+      }
+      // 6. L'ambition d'échelle contredit le panier.
+      if ((amb === "scaler" || amb === "sansmoi") && panier <= 1) {
+        return {
+          racontent: "Vous voulez changer d'échelle, mais à ce panier il vous faudrait un volume que votre modèle ne peut pas porter.",
+          produit: "Vous courez pour rester immobile : plus de clients, autant de fatigue, peu de marge.",
+          suite: "Votre offre et votre positionnement prix — pour monter en valeur avant de pousser le volume."
+        };
+      }
+      // 7. Vouloir grandir contredit une acquisition passive.
+      if (veutGrandir && (has(canaux, "rien") || (!actif && (has(canaux, "boa") || has(canaux, "passage"))))) {
+        return {
+          racontent: "Vous voulez grandir, mais rien, aujourd'hui, ne va chercher le client. Votre croissance dépend de ce qui vient tout seul.",
+          produit: "Vous êtes à la merci d'un canal que vous ne commandez pas. Le jour où il ralentit, vous n'avez aucun relais.",
+          suite: "Votre acquisition — pour construire un canal que vous actionnez, au lieu de le subir."
+        };
+      }
+      // 8. Pas encore de signal.
+      if (aud <= 1 && ca <= 1) {
+        return {
+          racontent: "Vous cherchez à passer un cap, mais aucun canal ne ramène de clients de façon répétable. Il n'y a pas encore de système à optimiser.",
+          produit: "Sans signal clair, chaque effort part dans une direction différente. L'énergie se disperse.",
+          suite: "Votre tout premier canal d'acquisition — trouver celui qui ramène, avant tout le reste."
+        };
+      }
+      // 0. Cohérent en surface.
+      return {
+        racontent: "Vos réponses sont cohérentes : ambition, chiffres et quotidien racontent à peu près la même histoire. S'il y a une contradiction, elle est plus fine.",
+        produit: "C'est souvent à ce stade que le prochain palier se joue dans des détails invisibles de l'extérieur.",
+        suite: "Vos chiffres détaillés et votre organisation — pour trouver le point de levier exact."
+      };
     }
 
-    /* Le titre : le signal le plus fort, en une phrase. */
-    function headline(a, jours, v) {
-      var prod = has(jours, "produire"), ops = has(jours, "ops");
-      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (prod || ops))
-        return "Vous vous êtes créé un job, pas une entreprise.";
-      if (+v.q4 >= 2 && v.q5 === "0") return "Vous travaillez pour le décor.";
-      if (v.q5 === "nsp") return "Vous pilotez à l'aveugle.";
-      if (+v.q3 >= 2 && (+v.q4 <= 1 || v.q6 === "0" || v.q6 === "nsp")) return "Vous avez l'attention. Pas la vente.";
-      if ((v.q6 === "2" || v.q6 === "3") && (v.q7 === "0" || v.q7 === "nsp")) return "Vous remplissez un seau percé.";
-      if (+v.q3 <= 1 && +v.q4 <= 1) return "Pas encore de signal. Il vous faut un canal.";
-      return "Les fondations tiennent. Le levier est ailleurs.";
+    /* Maturité du système : une étape, pas un score. 0/1/2. */
+    function maturity(v) {
+      var jours = v.q2, handsIn = has(jours, "produire") || has(jours, "ops"),
+          pil = has(jours, "piloter");
+      var team = v.q10, ownsChannel = has(v.q9, "reseaux") || has(v.q9, "demarche");
+      var conv = v.q6, fid = v.q7;
+      var moteurSain = (conv === "2" || conv === "3") && (fid === "2" || fid === "3");
+      if (handsIn && (team === "solo" || team === "petite")) return 0; // dépendante
+      if (pil && ownsChannel && moteurSain && (team === "moyenne" || team === "grande")) return 2; // scalable
+      return 1; // structurée
     }
+    var STAGE_CAP = [
+      "Aujourd'hui, votre entreprise a besoin de vous pour tourner. Le prochain système devra tenir sans votre présence.",
+      "Votre entreprise tient debout, mais elle ne passe pas encore à l'échelle toute seule. C'est le palier suivant.",
+      "Votre entreprise peut grandir sans dépendre de votre présence. Le levier est dans le raffinement, pas dans les fondations."
+    ];
 
     var hint = document.getElementById("lr-hint");
     var radios = ["q1", "q3", "q4", "q5", "q6", "q7", "q8", "q10"];
@@ -267,13 +331,25 @@
       var textEl = form.querySelector('[name="q11"]');
       v.q11 = textEl ? textEl.value : "";
 
-      document.getElementById("lr-headline").textContent = headline(v.q1, v.q2, v);
-      document.getElementById("lr-align").textContent = readAlignement(v.q1, v.q2);
-      document.getElementById("lr-domino").textContent = readDomino(v);
+      var c = readContradiction(v);
+      document.getElementById("lr-poursuit").textContent = poursuit(v);
+      document.getElementById("lr-contradiction").textContent = c.racontent;
+      document.getElementById("lr-produit").textContent = c.produit;
+      document.getElementById("lr-suite").textContent = c.suite;
+
+      // Maturité : marque l'étape courante et celles déjà franchies.
+      var m = maturity(v);
+      Array.prototype.forEach.call(result.querySelectorAll(".stage li"), function (li) {
+        var k = parseInt(li.getAttribute("data-k"), 10);
+        li.classList.remove("is-here", "is-done");
+        if (k < m) li.classList.add("is-done");
+        if (k === m) li.classList.add("is-here");
+      });
+      document.getElementById("lr-stage-cap").textContent = STAGE_CAP[m];
 
       var echo = document.getElementById("lr-echo");
       if (v.q11 && v.q11.trim()) {
-        echo.textContent = "Vous ciblez : « " + v.q11.trim() + " ». Nous verrons si vos chiffres racontent la même histoire.";
+        echo.textContent = "Vous ciblez : « " + v.q11.trim() + " ». Le Diagnostic WarTime vérifie si vos chiffres racontent la même histoire.";
         echo.hidden = false;
       } else {
         echo.hidden = true;

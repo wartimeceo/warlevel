@@ -544,6 +544,26 @@ section { position: relative; z-index: 1; }
 
 .lecture-result { margin: 44px 0 0; max-width: 700px; }
 .lr__eyebrow { display: block; color: var(--blood); margin-bottom: 16px; }
+
+/* Maturité du système : une étape, pas un score. */
+.lr__stage { margin: 4px 0 30px; }
+.lr__stage > .mono { display: block; color: var(--steel); margin-bottom: 12px; }
+.stage { list-style: none; display: flex; gap: 8px; padding: 0; margin: 0; }
+.stage li {
+  flex: 1; text-align: center;
+  font-family: var(--mono); font-size: .72rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 11px 6px; border: 1px solid var(--line); border-radius: 2px;
+  color: var(--steel);
+}
+.stage li.is-done { color: var(--blood); border-color: color-mix(in srgb, var(--blood) 40%, transparent); }
+.stage li.is-here { color: #fff; background: var(--blood); border-color: var(--blood); font-weight: 600; }
+.lr__stage-cap { margin: 14px 0 0; color: var(--ink); font-size: 1.02rem; max-width: 60ch; }
+
+/* Le temps fort de la lecture : la contradiction. */
+.lr__block--key { border-top-color: var(--blood); }
+.lr__block--key .mono { color: var(--blood); }
+.lr__block--key p { font-weight: 500; }
 .lr__headline {
   font-family: var(--display);
   font-weight: 700; font-stretch: 112%;
