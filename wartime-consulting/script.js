@@ -139,40 +139,111 @@
     });
   })();
 
-  /* ---------- Auto-diagnostic — indice de dépendance ----------
-     Somme des réponses (0 / 10 / 20 sur 5 questions) = score 0–100.
-     Plus le score est haut, plus l'entreprise dépend du dirigeant. */
+  /* ---------- Lecture express — moteur de règles (méthode WarTime) ----------
+     Les 10 réponses passent dans les règles ci-dessous et sortent une lecture
+     teaser : alignement du patron + premier domino. Le reste (pôle rentable,
+     actif sous-exploité, plan) est réservé à la vraie lecture payante. */
   (function () {
-    var quiz = document.getElementById("quiz");
-    var result = document.getElementById("quiz-result");
-    if (!quiz || !result) return;
+    var form = document.getElementById("lecture");
+    var result = document.getElementById("lecture-result");
+    if (!form || !result) return;
 
-    var names = ["q1", "q2", "q3", "q4", "q5"];
+    // TODO: coller ici le lien de paiement Stripe (Payment Link) quand le
+    // compte est prêt. Tant que c'est vide, le bouton mène au formulaire.
+    var STRIPE_LINK = "";
+    if (STRIPE_LINK) document.getElementById("lr-pay").setAttribute("href", STRIPE_LINK);
 
-    function verdict(score) {
-      if (score <= 30) return "T'as un actif. Il tourne sans toi. C'est rare — protège-le.";
-      if (score <= 60) return "T'as une entreprise, mais elle penche sur toi. Un coup dur, et tout ralentit.";
-      return "T'as pas une entreprise. T'as un job très rentable qui s'arrête le jour où tu t'arrêtes.";
+    var AMB = {
+      sansmoi: "une boîte qui tourne sans toi",
+      marque: "devenir une référence",
+      scaler: "scaler",
+      vivre: "bien vivre de ton truc"
+    };
+    var JOUR = { produire: "produire", vendre: "vendre", ops: "gérer l'opérationnel", piloter: "piloter" };
+
+    function val(name) {
+      var el = form.querySelector('input[name="' + name + '"]:checked');
+      return el ? el.value : null;
     }
 
-    quiz.addEventListener("change", function () {
-      var total = 0, answered = 0;
-      names.forEach(function (n) {
-        var sel = quiz.querySelector('input[name="' + n + '"]:checked');
-        if (sel) { total += parseInt(sel.value, 10); answered += 1; }
-      });
-      if (answered < names.length) return;
+    /* Lecture 1 — alignement du patron : ambition déclarée vs journées réelles. */
+    function readAlignement(a, j) {
+      if (j === "piloter")
+        return "Bonne posture : tu pilotes, tu fais pas tout toi-même. Reste à voir si la machine derrière suit vraiment — c'est là que je regarde.";
+      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (j === "produire" || j === "ops"))
+        return "Désaligné. Tu veux " + AMB[a] + ", mais tes journées, c'est " + JOUR[j] + ". Tant que tout passe par tes mains, tu construis pas une entreprise — tu t'es créé un job. C'est ça qui te tient au plafond.";
+      if (a === "vivre" && (j === "produire" || j === "ops"))
+        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et je parie que tu le sens déjà venir.";
+      if (j === "vendre")
+        return "Tu passes tes journées à vendre. Ça remplit la caisse — mais si c'est QUE toi qui vends, la boîte s'arrête avec toi.";
+      return "Ton ambition et tes journées se tiennent à peu près. Le désalignement est plus fin — c'est là que ma vraie lecture creuse.";
+    }
 
-      document.getElementById("result-score").textContent = total;
-      document.getElementById("result-fill").style.width = total + "%";
-      document.getElementById("result-marker").style.left = total + "%";
-      document.getElementById("result-verdict").textContent = verdict(total);
+    /* Lecture 2 — le premier domino : prospect / message / promesse via les chiffres. */
+    function readDomino(v) {
+      var aud = +v.q3, ventes = +v.q4, conv = +v.q5, ret = +v.q6, prix = +v.q7, prosp = +v.q8, amb = v.q1;
+      if (aud >= 2 && (ventes <= 1 || conv <= 1))
+        return "T'as l'attention, pas la vente. Grosse audience, faibles ventes — tu parles aux mauvaises personnes, ou tu leur promets le mauvais truc. C'est PAS un problème d'audience.";
+      if (conv >= 2 && ret === 0)
+        return "Tu convertis, mais personne revient. Ta promesse dépasse ton produit, ou tu vends à des gens de passage. Tu remplis un seau percé.";
+      if ((amb === "scaler" || amb === "sansmoi") && prix <= 1)
+        return "Tu veux grossir, mais à ce prix il te faut un volume de dingue. Le blocage, c'est ton offre — monte en gamme ou change de modèle.";
+      if ((amb === "scaler" || amb === "sansmoi" || amb === "marque") && prosp === 0)
+        return "Tu veux que ça grossisse, mais tu vas pas chercher le client. Tu attends qu'on vienne. Tu veux le résultat sans le geste.";
+      if (aud <= 1 && ventes <= 1)
+        return "T'as pas encore de signal clair. Avant d'optimiser quoi que ce soit, il te faut UN canal qui ramène, répétable. Le reste vient après.";
+      return "Tes fondations tiennent debout. Le vrai domino est plus fin — et c'est exactement là que ma lecture complète rentre dans le détail.";
+    }
 
-      var first = result.hidden;
-      result.hidden = false;
-      if (first) {
-        result.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+    /* Le titre : le signal le plus fort, en une phrase. */
+    function headline(a, j, v) {
+      if ((a === "sansmoi" || a === "scaler" || a === "marque") && (j === "produire" || j === "ops"))
+        return "Tu t'es créé un job, pas une entreprise.";
+      if (+v.q3 >= 2 && (+v.q4 <= 1 || +v.q5 <= 1)) return "T'as l'attention. Pas la vente.";
+      if (+v.q5 >= 2 && +v.q6 === 0) return "Tu remplis un seau percé.";
+      if (+v.q3 <= 1 && +v.q4 <= 1) return "Pas encore de signal. Faut un canal.";
+      return "Les fondations tiennent. Le levier est ailleurs.";
+    }
+
+    var hint = document.getElementById("lr-hint");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var need = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9"];
+      var missing = null;
+      for (var i = 0; i < need.length; i++) {
+        if (!val(need[i])) { missing = need[i]; break; }
       }
+      if (missing) {
+        if (hint) hint.hidden = false;
+        var fs = form.querySelector('input[name="' + missing + '"]');
+        if (fs && fs.closest) {
+          var block = fs.closest("fieldset");
+          if (block) block.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+        }
+        return;
+      }
+      if (hint) hint.hidden = true;
+
+      var v = {};
+      need.forEach(function (n) { v[n] = val(n); });
+      var textEl = form.querySelector('[name="q10"]');
+      v.q10 = textEl ? textEl.value : "";
+
+      document.getElementById("lr-headline").textContent = headline(v.q1, v.q2, v);
+      document.getElementById("lr-align").textContent = readAlignement(v.q1, v.q2);
+      document.getElementById("lr-domino").textContent = readDomino(v);
+
+      var echo = document.getElementById("lr-echo");
+      if (v.q10 && v.q10.trim()) {
+        echo.textContent = "Tu dis vendre : « " + v.q10.trim() + " ». On verra si tes chiffres racontent la même histoire.";
+        echo.hidden = false;
+      } else {
+        echo.hidden = true;
+      }
+
+      result.hidden = false;
+      result.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     });
   })();
 })();

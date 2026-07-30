@@ -108,70 +108,126 @@
   </section>
 
   <!-- =========================================================
-       AUTO-DIAGNOSTIC
+       LECTURE EXPRESS — moteur de règles (méthode WarTime)
        ========================================================= -->
   <section class="sec" id="test">
     <div class="wrap">
-      <span class="plate mono">Auto-diagnostic · 30 secondes</span>
-      <h2 class="reveal">Ton business tourne sans toi&nbsp;?</h2>
-      <p class="lede reveal">Cinq questions. Un chiffre&nbsp;: ton indice de dépendance — la mesure que je sors en premier dans chaque diagnostic. Plus il est haut, plus tout repose sur toi.</p>
+      <span class="plate mono">Lecture express · 40 secondes</span>
+      <h2 class="reveal">Où ça bloque, vraiment ?</h2>
+      <p class="lede reveal">Réponds honnêtement. Je te sors une première lecture, à ma manière. La vraie — celle qui te débloque — c'est le diagnostic.</p>
 
-      <form class="quiz reveal" id="quiz" novalidate>
+      <form class="quiz reveal" id="lecture" novalidate>
         <fieldset class="quiz__q">
-          <legend>Tu peux partir une semaine, sans prévenir, sans que rien bouge&nbsp;?</legend>
+          <legend>1. Ton ambition, franchement ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q1" value="0"><span>Oui</span></label>
-            <label><input type="radio" name="q1" value="10"><span>En partie</span></label>
-            <label><input type="radio" name="q1" value="20"><span>Non</span></label>
+            <label><input type="radio" name="q1" value="sansmoi"><span>Une boîte qui tourne sans moi</span></label>
+            <label><input type="radio" name="q1" value="marque"><span>Devenir une marque, une référence</span></label>
+            <label><input type="radio" name="q1" value="scaler"><span>Scaler, faire beaucoup plus</span></label>
+            <label><input type="radio" name="q1" value="vivre"><span>Bien vivre de mon truc</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>Les décisions importantes peuvent se prendre sans toi&nbsp;?</legend>
+          <legend>2. Tes journées, c'est surtout quoi ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q2" value="0"><span>Oui</span></label>
-            <label><input type="radio" name="q2" value="10"><span>En partie</span></label>
-            <label><input type="radio" name="q2" value="20"><span>Non</span></label>
+            <label><input type="radio" name="q2" value="produire"><span>Je produis (contenu, la prestation)</span></label>
+            <label><input type="radio" name="q2" value="vendre"><span>Je vends, je prospecte</span></label>
+            <label><input type="radio" name="q2" value="ops"><span>Je gère l'opérationnel</span></label>
+            <label><input type="radio" name="q2" value="piloter"><span>Je pilote et je délègue</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>Si tu arrêtes demain, tes revenus continuent&nbsp;?</legend>
+          <legend>3. Ton audience / ton trafic par mois ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q3" value="0"><span>Oui</span></label>
-            <label><input type="radio" name="q3" value="10"><span>En partie</span></label>
-            <label><input type="radio" name="q3" value="20"><span>Non</span></label>
+            <label><input type="radio" name="q3" value="0"><span>Moins de 1 000</span></label>
+            <label><input type="radio" name="q3" value="1"><span>1k – 10k</span></label>
+            <label><input type="radio" name="q3" value="2"><span>10k – 100k</span></label>
+            <label><input type="radio" name="q3" value="3"><span>+ 100k</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>Quelqu'un d'autre pourrait tenir la barre à ta place&nbsp;?</legend>
+          <legend>4. Tes ventes par mois ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q4" value="0"><span>Oui</span></label>
-            <label><input type="radio" name="q4" value="10"><span>En partie</span></label>
-            <label><input type="radio" name="q4" value="20"><span>Non</span></label>
+            <label><input type="radio" name="q4" value="0"><span>0 – 1k€</span></label>
+            <label><input type="radio" name="q4" value="1"><span>1k – 5k€</span></label>
+            <label><input type="radio" name="q4" value="2"><span>5k – 20k€</span></label>
+            <label><input type="radio" name="q4" value="3"><span>+ 20k€</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>Les mêmes problèmes reviennent tous les six mois&nbsp;?</legend>
+          <legend>5. Sur 10 personnes qui te découvrent, combien achètent ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q5" value="0"><span>Non</span></label>
-            <label><input type="radio" name="q5" value="10"><span>Parfois</span></label>
-            <label><input type="radio" name="q5" value="20"><span>Oui</span></label>
+            <label><input type="radio" name="q5" value="0"><span>0</span></label>
+            <label><input type="radio" name="q5" value="1"><span>Moins d'1</span></label>
+            <label><input type="radio" name="q5" value="2"><span>1 – 2</span></label>
+            <label><input type="radio" name="q5" value="3"><span>3 +</span></label>
           </div>
         </fieldset>
+        <fieldset class="quiz__q">
+          <legend>6. Sur 10 clients, combien reviennent ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q6" value="0"><span>0 – 1</span></label>
+            <label><input type="radio" name="q6" value="1"><span>2 – 4</span></label>
+            <label><input type="radio" name="q6" value="2"><span>5 +</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>7. Ton prix moyen ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q7" value="0"><span>Moins de 20€</span></label>
+            <label><input type="radio" name="q7" value="1"><span>20 – 100€</span></label>
+            <label><input type="radio" name="q7" value="2"><span>100 – 1 000€</span></label>
+            <label><input type="radio" name="q7" value="3"><span>+ 1 000€</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>8. Tu vas chercher le client ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q8" value="2"><span>Oui, souvent</span></label>
+            <label><input type="radio" name="q8" value="1"><span>De temps en temps</span></label>
+            <label><input type="radio" name="q8" value="0"><span>Non, j'attends qu'on vienne</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>9. Vous êtes combien à bosser dessus ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q9" value="solo"><span>Juste moi</span></label>
+            <label><input type="radio" name="q9" value="petite"><span>2 à 5</span></label>
+            <label><input type="radio" name="q9" value="grande"><span>Plus de 5</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>10. En une phrase : à qui tu vends, et quoi tu leur promets ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q10" maxlength="160" autocomplete="off" placeholder="Ex : je vends du coaching à des créateurs qui veulent vivre de leur contenu.">
+        </fieldset>
+
+        <button class="btn btn--primary" type="submit">Voir ma lecture express</button>
+        <p class="lr__hint mono" id="lr-hint" hidden>Réponds aux 9 questions pour voir ta lecture (la 10e est facultative).</p>
       </form>
 
-      <div class="result" id="quiz-result" hidden>
-        <div class="result__gauge" aria-hidden="true">
-          <span class="result__track"></span>
-          <span class="result__fill" id="result-fill"></span>
-          <span class="result__marker" id="result-marker"></span>
+      <div class="lecture-result" id="lecture-result" hidden>
+        <span class="mono lr__eyebrow">Ta lecture express</span>
+        <p class="lr__headline" id="lr-headline" aria-live="polite"></p>
+
+        <div class="lr__block">
+          <span class="mono">Ton alignement</span>
+          <p id="lr-align"></p>
         </div>
-        <div class="result__row">
-          <span class="result__score" id="result-score" aria-live="polite">0</span>
-          <span class="result__scale mono">/ 100 — indice de dépendance</span>
+        <div class="lr__block">
+          <span class="mono">Ton premier domino</span>
+          <p id="lr-domino"></p>
         </div>
-        <p class="result__verdict" id="result-verdict"></p>
-        <p class="result__push">Ça, c'est une estimation en cinq questions. Le vrai calcul — et le plan pour t'en sortir — c'est le diagnostic.</p>
-        <a class="btn btn--primary" href="#offres">Faire le diagnostic — 990 €</a>
+        <p class="lr__echo" id="lr-echo" hidden></p>
+
+        <div class="lr__locked">
+          <span class="mono">Ce que le test voit pas d'ici</span>
+          <p>Quel pôle te rapporte vraiment. Le produit qui devrait porter la boîte. Ton actif que t'exploites pas. Et le plan pour tirer le bon levier.</p>
+          <p class="lr__locked-line">Ça, c'est ta vraie lecture.</p>
+        </div>
+
+        <div class="lr__cta">
+          <a class="btn btn--primary" id="lr-pay" href="#contact">Ma vraie lecture — 990 €</a>
+          <a class="btn btn--ghost" href="#contact">En parler d'abord</a>
+        </div>
       </div>
     </div>
   </section>
