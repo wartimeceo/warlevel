@@ -363,6 +363,11 @@ section { position: relative; z-index: 1; }
   color: var(--ink);
 }
 .hero__sub p { margin: 0 0 6px; }
+.hero__go {
+  margin-top: 16px !important;
+  font-weight: 500;
+  color: var(--blood);
+}
 
 .hero__actions {
   margin: 38px 0 0;
