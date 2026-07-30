@@ -119,7 +119,7 @@
             "Ce qui n'avance plus aujourd'hui :\n" + form.blocage.value;
           window.location.href = mailtoLink(subject, body);
           success.textContent =
-            "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — on vous répond sous 48 heures.";
+            "Votre message est prêt dans votre messagerie. Cliquez sur Envoyer — nous vous répondons sous 48 heures.";
           show(form, success);
         });
     });
@@ -189,13 +189,13 @@
       var prod = has(jours, "produire"), ops = has(jours, "ops"),
           pil = has(jours, "piloter"), vend = has(jours, "vendre");
       if (pil && !prod && !ops)
-        return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là qu'on regarde.";
+        return "Bonne posture : vous pilotez, vous ne faites pas tout vous-même. Reste à voir si la machine derrière suit vraiment — c'est là que nous regardons.";
       if ((a === "sansmoi" || a === "scaler" || a === "marque") && (prod || ops)) {
         var quoi = prod ? "vous produisez encore vous-même" : "vous gérez encore l'opérationnel vous-même";
         return "Désaligné. Vous voulez " + AMB[a] + ", mais " + quoi + ". Tant que tout passe par vos mains, vous vous êtes créé un job, pas une entreprise. C'est ça qui vous tient au plafond.";
       }
       if (a === "vivre" && (prod || ops))
-        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et on parie que vous le sentez déjà venir.";
+        return "Au moins c'est cohérent. Mais « bien vivre » a un plafond bas — et nous parions que vous le sentez déjà venir.";
       if (vend && !prod && !ops)
         return "Vous passez vos journées à vendre. Ça remplit la caisse — mais si c'est vous seul qui vendez, l'entreprise s'arrête avec vous.";
       return "Votre ambition et vos journées se tiennent à peu près. Le désalignement est plus fin — c'est là que notre vraie lecture creuse.";
@@ -211,7 +211,7 @@
       if (ca >= 2 && marge === "0")
         return "Gros chiffre, marge écrasée. Vous travaillez pour le décor : le vrai blocage, c'est votre modèle et vos coûts — pas votre volume.";
       if (marge === "nsp")
-        return "Vous ne connaissez pas votre marge nette. C'est le premier chiffre à tenir : sans lui, vous pilotez à l'aveugle. On commence par là.";
+        return "Vous ne connaissez pas votre marge nette. C'est le premier chiffre à tenir : sans lui, vous pilotez à l'aveugle. Nous commençons par là.";
       if (aud >= 2 && (ca <= 1 || conv === "0" || conv === "nsp"))
         return "Vous avez l'attention, pas la vente. Beaucoup de monde vous découvre, peu achètent — vous parlez aux mauvaises personnes, ou vous leur promettez le mauvais truc. Ce n'est PAS un problème d'audience.";
       if ((conv === "2" || conv === "3") && (fid === "0" || fid === "nsp"))
@@ -219,7 +219,7 @@
       if ((amb === "scaler" || amb === "sansmoi") && panier <= 1)
         return "Vous voulez grossir, mais à ce panier il vous faut un volume énorme. Le blocage, c'est votre offre — montez en gamme ou changez de modèle.";
       if (veutGrandir && has(canaux, "rien") && !actif)
-        return "Vous voulez que ça grossisse, mais rien ne va chercher le client. Vous attendez. On ne passe pas un cap en attendant.";
+        return "Vous voulez que ça grossisse, mais rien ne va chercher le client. Vous attendez. Nous ne passons pas un cap en attendant.";
       if (veutGrandir && !actif && (has(canaux, "boa") || has(canaux, "passage")))
         return "Vous dépendez d'un canal que vous ne contrôlez pas — le bouche-à-oreille, le passage. Pour changer de dimension, il vous faut un canal que VOUS actionnez.";
       if (aud <= 1 && ca <= 1)
@@ -273,7 +273,7 @@
 
       var echo = document.getElementById("lr-echo");
       if (v.q11 && v.q11.trim()) {
-        echo.textContent = "Vous ciblez : « " + v.q11.trim() + " ». On verra si vos chiffres racontent la même histoire.";
+        echo.textContent = "Vous ciblez : « " + v.q11.trim() + " ». Nous verrons si vos chiffres racontent la même histoire.";
         echo.hidden = false;
       } else {
         echo.hidden = true;
