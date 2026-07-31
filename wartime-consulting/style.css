@@ -585,7 +585,7 @@ section { position: relative; z-index: 1; }
   font-weight: 700; font-stretch: 112%;
   letter-spacing: -.015em; line-height: 1.06;
   font-size: clamp(1.7rem, 4.4vw, 2.7rem);
-  margin: 0 0 26px;
+  margin: 0 0 14px;
   max-width: 20ch;
   text-wrap: balance;
 }

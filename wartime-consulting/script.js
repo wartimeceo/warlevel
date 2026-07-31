@@ -299,6 +299,19 @@
       suite: "Vos chiffres détaillés et votre organisation — pour trouver le point de levier exact."
     };
 
+    /* La phrase à retenir — le verdict qu'on screenshotte et qu'on partage. */
+    var VERDICT = {
+      "La dépendance au fondateur": "Vous vous êtes créé un job, pas une entreprise.",
+      "La valeur qui fuit": "Vous travaillez pour le décor.",
+      "Le pilotage à l'aveugle": "Vous dirigez à l'aveugle.",
+      "L'attention sans la vente": "Vous avez l'attention. Pas la vente.",
+      "Le réservoir percé": "Vous remplissez un réservoir percé.",
+      "Le modèle sous l'ambition": "Vous courez pour rester immobile.",
+      "La croissance passive": "Vous attendez le client. Une entreprise va le chercher.",
+      "L'absence de signal": "Pas encore de système. Juste des efforts."
+    };
+    var VERDICT_COHERENT = "Vos fondations tiennent. Le vrai levier est plus fin.";
+
     /* Teste toutes les contradictions ; renvoie celles qui se déclenchent. */
     function detect(v) {
       var out = [];
@@ -354,6 +367,7 @@
       var found = detect(v);
       var dominant = found.length ? found[0] : null;
       var c = dominant ? dominant.build(v) : COHERENT;
+      document.getElementById("lr-headline").textContent = dominant ? VERDICT[dominant.label] : VERDICT_COHERENT;
       document.getElementById("lr-poursuit").textContent = poursuit(v);
       document.getElementById("lr-contradiction").textContent = c.racontent;
       document.getElementById("lr-produit").textContent = c.produit;
