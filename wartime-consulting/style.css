@@ -543,7 +543,23 @@ section { position: relative; z-index: 1; }
 .lr__hint { display: block; margin-top: 14px; color: var(--blood); letter-spacing: .12em; }
 
 .lecture-result { margin: 44px 0 0; max-width: 700px; }
-.lr__eyebrow { display: block; color: var(--blood); margin-bottom: 16px; }
+.lr__eyebrow { display: block; color: var(--blood); margin-bottom: 10px; }
+.lr__count {
+  font-family: var(--display); font-weight: 700; font-stretch: 106%;
+  font-size: clamp(1.15rem, 2.6vw, 1.42rem); line-height: 1.18;
+  letter-spacing: -.01em; margin: 0 0 28px; max-width: 30ch; text-wrap: balance;
+}
+.lr__others { list-style: none; margin: 6px 0 0; padding: 0; }
+.lr__others li {
+  font-family: var(--mono); font-size: .82rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink);
+  padding: 9px 0 9px 22px; position: relative;
+  border-top: 1px solid color-mix(in srgb, var(--blood) 22%, transparent);
+}
+.lr__others li:first-child { border-top: none; }
+.lr__others li::before {
+  content: "•"; position: absolute; left: 4px; color: var(--blood);
+}
 
 /* Maturité du système : une étape, pas un score. */
 .lr__stage { margin: 4px 0 30px; }

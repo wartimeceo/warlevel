@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>WarTime Consulting — Le WarTime Way</title>
-  <meta name="description" content="Toutes les entreprises atteignent un plafond. Les meilleures changent de système avant de chercher à travailler davantage. Le WarTime Way : identifier ce qui vous plafonne, concevoir le prochain cap.">
+  <title>WarTime Consulting — WarTime Way</title>
+  <meta name="description" content="Toutes les entreprises atteignent un plafond. Les meilleures changent de système avant de chercher à travailler davantage. WarTime Way : identifier ce qui vous plafonne, concevoir le prochain cap.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="WarTime Consulting — Le WarTime Way">
+  <meta property="og:title" content="WarTime Consulting — WarTime Way">
   <meta property="og:description" content="Toutes les entreprises atteignent un plafond. Les meilleures changent de système avant de chercher à travailler davantage. Nous identifions ce qui vous plafonne et concevons le prochain cap.">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="WarTime Consulting">
@@ -41,7 +41,7 @@
       <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
       <ul class="nav__links" id="nav-links">
         <li><a href="#probleme">Le problème</a></li>
-        <li><a href="#methode">Le WarTime Way</a></li>
+        <li><a href="#methode">WarTime Way</a></li>
         <li><a href="#offres">Les offres</a></li>
         <li><a href="#qui">Pourquoi nous</a></li>
         <li><a href="#doctrine">La doctrine</a></li>
@@ -66,17 +66,15 @@
       </div>
 
       <div class="hero__content">
-        <h1>Si vous vous arrêtez trois mois,<br><em>que reste-t-il ?</em></h1>
+        <h1>Vous prenez peut-être les bonnes décisions.<br><em>Pour le mauvais problème.</em></h1>
 
         <div class="hero__sub">
-          <p>Si la réponse est « pas grand-chose », votre entreprise dépend encore trop de vous.</p>
-          <p>Si vous sentez que votre croissance ralentit, ce n'est probablement pas un problème de travail. C'est que votre entreprise a atteint un plafond.</p>
-          <p>Le WarTime Way consiste à identifier ce qui crée ce plafond et à concevoir ce qu'il faut pour franchir le prochain cap.</p>
+          <p>La plupart des dirigeants cherchent des réponses. Nous cherchons autre chose : l'erreur de lecture qui les empêche de franchir leur prochain cap.</p>
+          <p>Vous n'avez probablement pas le problème que vous pensez avoir.</p>
         </div>
 
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#test">Commencer le diagnostic</a>
-          <a class="btn btn--ghost" href="#doctrine">Découvrir le WarTime Way</a>
+          <a class="btn btn--primary" href="#test">Faire le diagnostic</a>
         </div>
 
         <p class="mono hero__stamp">WarTime Consulting — Direction stratégique — Paris</p>
@@ -198,7 +196,8 @@
       </form>
 
       <div class="lecture-result" id="lecture-result" hidden>
-        <span class="mono lr__eyebrow">Votre lecture WarTime</span>
+        <span class="mono lr__eyebrow">Ce que nous avons trouvé</span>
+        <p class="lr__count" id="lr-count" aria-live="polite"></p>
 
         <div class="lr__stage">
           <span class="mono">Maturité de votre système</span>
@@ -215,7 +214,7 @@
           <p id="lr-poursuit"></p>
         </div>
         <div class="lr__block lr__block--key">
-          <span class="mono">Ce que vos réponses racontent</span>
+          <span class="mono">La contradiction que nous révélons</span>
           <p id="lr-contradiction"></p>
         </div>
         <div class="lr__block">
@@ -229,9 +228,9 @@
         <p class="lr__echo" id="lr-echo" hidden></p>
 
         <div class="lr__locked">
-          <span class="mono">Ce que nous ne savons pas encore</span>
-          <p>Nous n'avons pas vu vos chiffres détaillés, votre agenda, votre acquisition, votre offre.</p>
-          <p class="lr__locked-line">C'est précisément ce qui sépare cette lecture du Diagnostic WarTime.</p>
+          <span class="mono" id="lr-lock-label">Les autres mécanismes</span>
+          <ul class="lr__others" id="lr-others"></ul>
+          <p class="lr__locked-line" id="lr-lock-line"></p>
         </div>
 
         <div class="lr__cta">
@@ -268,9 +267,9 @@
        ========================================================= -->
   <section class="sec" id="methode">
     <div class="wrap">
-      <span class="plate mono">02 — Le WarTime Way</span>
+      <span class="plate mono">02 — WarTime Way</span>
       <h2 class="reveal">Nous ne cherchons pas ce qui ne fonctionne pas.<br>Nous cherchons ce qui se contredit.</h2>
-      <p class="lede reveal">Une entreprise qui plafonne ne manque presque jamais d'efforts. Elle abrite une contradiction que personne ne voit de l'intérieur — entre ce que vous visez et ce que vous faites vraiment.</p>
+      <p class="lede reveal">La plupart des cabinets cherchent les problèmes. Nous cherchons le mécanisme qui les produit — parce qu'un problème disparaît rarement seul, alors qu'un mécanisme en produit des dizaines. Une entreprise est un système, pas une liste de problèmes.</p>
 
       <div class="two">
         <div class="two__block reveal">
@@ -320,7 +319,7 @@
         <div class="step reveal">
           <span class="step__num">04</span>
           <p class="step__title">Vous repartez avec une décision</p>
-          <p>Pas cinquante. Une. La plus importante.</p>
+          <p>Pas cinquante. Celle qui rend les quarante-neuf autres inutiles.</p>
         </div>
       </div>
 
@@ -335,6 +334,7 @@
     <div class="wrap">
       <span class="plate mono">04 — Les offres</span>
       <h2 class="reveal">Trois étapes. Une seule logique.</h2>
+      <p class="lede reveal">Nous ne vendons pas des recommandations. Nous concevons des systèmes — parce qu'une recommandation s'oublie, alors qu'un système continue de produire des résultats longtemps après notre départ.</p>
 
       <div class="offers">
         <div class="offer offer--feature reveal">
@@ -380,7 +380,7 @@
 
       <blockquote class="quote reveal">Un consultant qui se trompe change de client. Nous, nous avons construit avec notre propre argent. Nous savons ce qu'une erreur coûte — nous l'avons payée.</blockquote>
 
-      <p class="bio__close reveal">Le WarTime Way n'est pas une théorie. C'est une façon de penser née en construisant. Pas en observant.</p>
+      <p class="bio__close reveal">WarTime Way n'est pas une théorie. C'est une façon de penser née en construisant. Pas en observant.</p>
 
       <p class="mono">WarTime — Paris</p>
     </div>
@@ -422,13 +422,14 @@
        ========================================================= -->
   <section class="sec sec--dark" id="doctrine">
     <div class="wrap">
-      <span class="plate mono">07 — Le WarTime Way</span>
+      <span class="plate mono">07 — WarTime Way</span>
       <h2 class="reveal">Toutes les entreprises atteignent un plafond.</h2>
 
       <div class="bio reveal" style="max-width:64ch;margin-bottom:20px;">
-        <p>Les meilleures ne travaillent pas forcément davantage. Elles changent de système.</p>
-        <p>Le WarTime Way repose sur une conviction simple : le système qui vous a permis d'arriver jusqu'ici n'est pas celui qui vous mènera plus loin. Notre rôle est d'identifier le premier, puis de concevoir le second.</p>
+        <p>Une entreprise ne ralentit pas parce que les gens travaillent moins. Elle ralentit parce que son système est devenu trop petit pour son ambition.</p>
+        <p>WarTime Way repose sur une conviction simple : le système qui vous a permis d'arriver jusqu'ici n'est pas celui qui vous mènera plus loin. Les meilleures ne franchissent pas leur plafond en travaillant davantage — elles changent de système. Notre rôle est d'identifier le premier, puis de concevoir le second.</p>
         <p>Nous n'impressionnons pas avec des mots compliqués. Nous clarifions des problèmes compliqués.</p>
+        <p>Nous voulons être le cabinet auquel on pense <em>avant</em> une décision importante — pas seulement quand un problème apparaît.</p>
       </div>
 
       <div class="doc">
@@ -463,7 +464,7 @@
             <span class="cover__top">Doctrine — Paris</span>
             <div>
               <div class="cover__title">WARTIME</div>
-              <p class="cover__sub">Le WarTime Way.</p>
+              <p class="cover__sub">WarTime Way.</p>
             </div>
           </div>
         </div>
