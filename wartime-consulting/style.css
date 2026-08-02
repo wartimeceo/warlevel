@@ -17,7 +17,7 @@
 
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
-  --display: "Archivo", "Arial Narrow", Helvetica, Arial, sans-serif;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
 }
 
 /* ---------- Reset léger ---------- */
