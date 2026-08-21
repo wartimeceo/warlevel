@@ -105,86 +105,77 @@
         <fieldset class="quiz__q">
           <legend>1. Quel est votre prochain cap ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q1" value="sansmoi"><span>Construire une entreprise qui ne dépend plus de moi</span></label>
-            <label><input type="radio" name="q1" value="marque"><span>Faire de mon entreprise une référence</span></label>
-            <label><input type="radio" name="q1" value="scaler"><span>Changer d'échelle</span></label>
-            <label><input type="radio" name="q1" value="vivre"><span>Vivre sereinement de mon activité</span></label>
-          </div>
-        </fieldset>
-        <fieldset class="quiz__q quiz__q--multi" data-group="q2" data-max="2">
-          <legend>2. Comment fonctionnent réellement vos journées ? <span class="opt-note">2 réponses max</span></legend>
-          <div class="quiz__opts">
-            <label><input type="checkbox" name="q2" value="produire"><span>Je produis (le contenu, la prestation)</span></label>
-            <label><input type="checkbox" name="q2" value="vendre"><span>Je vends, je prospecte</span></label>
-            <label><input type="checkbox" name="q2" value="ops"><span>Je gère l'opérationnel</span></label>
-            <label><input type="checkbox" name="q2" value="piloter"><span>Je pilote et je délègue</span></label>
+            <label><input type="radio" name="q1" value="reference"><span>Faire de mon entreprise une référence</span></label>
+            <label><input type="radio" name="q1" value="scale"><span>Changer d'échelle</span></label>
+            <label><input type="radio" name="q1" value="sansmoi"><span>Construire quelque chose qui ne dépend plus de moi</span></label>
+            <label><input type="radio" name="q1" value="lancement"><span>Réussir un lancement, un nouveau pari</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>3. Combien de personnes vous découvrent chaque mois ?</legend>
+          <legend>2. Qu'est-ce qui vous empêche de l'atteindre, selon vous ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q3" value="0"><span>Moins de 1 000</span></label>
-            <label><input type="radio" name="q3" value="1"><span>1k – 10k</span></label>
-            <label><input type="radio" name="q3" value="2"><span>10k – 100k</span></label>
-            <label><input type="radio" name="q3" value="3"><span>+ 100k</span></label>
+            <label><input type="radio" name="q2" value="clients"><span>Je manque de clients</span></label>
+            <label><input type="radio" name="q2" value="offre"><span>Mon offre ne convertit plus assez</span></label>
+            <label><input type="radio" name="q2" value="orga"><span>Mon organisation ne suit plus</span></label>
+            <label><input type="radio" name="q2" value="position"><span>Mon positionnement n'est plus assez fort</span></label>
+            <label><input type="radio" name="q2" value="nsp"><span>Je sais qu'il y a un problème, mais je n'arrive pas à l'identifier</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>4. Quel est votre chiffre d'affaires mensuel ?</legend>
+          <legend>3. Qu'avez-vous déjà essayé de changer ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q3" maxlength="180" autocomplete="off" placeholder="Ex : j'ai refait mon offre, changé de canal, recruté…">
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>4. Qu'est-ce qui a fait votre succès jusqu'ici ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q4" maxlength="180" autocomplete="off" placeholder="Ex : le bouche-à-oreille, ma présence, la qualité produit…">
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>5. Quel est votre chiffre d'affaires mensuel ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q4" value="0"><span>0 – 1k€</span></label>
-            <label><input type="radio" name="q4" value="1"><span>1k – 5k€</span></label>
-            <label><input type="radio" name="q4" value="2"><span>5k – 20k€</span></label>
-            <label><input type="radio" name="q4" value="3"><span>+ 20k€</span></label>
+            <label><input type="radio" name="q5" value="0"><span>0 – 1k€</span></label>
+            <label><input type="radio" name="q5" value="1"><span>1k – 5k€</span></label>
+            <label><input type="radio" name="q5" value="2"><span>5k – 20k€</span></label>
+            <label><input type="radio" name="q5" value="3"><span>+ 20k€</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>5. Quelle est votre marge nette ?</legend>
+          <legend>6. Quelle est votre marge nette ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q5" value="0"><span>Moins de 10%</span></label>
-            <label><input type="radio" name="q5" value="1"><span>10 – 30%</span></label>
-            <label><input type="radio" name="q5" value="2"><span>30 – 50%</span></label>
-            <label><input type="radio" name="q5" value="3"><span>+ 50%</span></label>
-            <label><input type="radio" name="q5" value="nsp"><span>Je ne sais pas</span></label>
-          </div>
-        </fieldset>
-        <fieldset class="quiz__q">
-          <legend>6. Quel est votre taux de conversion ?</legend>
-          <div class="quiz__opts">
+            <label><input type="radio" name="q6" value="0"><span>Moins de 10%</span></label>
+            <label><input type="radio" name="q6" value="1"><span>10 – 30%</span></label>
+            <label><input type="radio" name="q6" value="2"><span>30 – 50%</span></label>
+            <label><input type="radio" name="q6" value="3"><span>+ 50%</span></label>
             <label><input type="radio" name="q6" value="nsp"><span>Je ne sais pas</span></label>
-            <label><input type="radio" name="q6" value="0"><span>Moins de 1%</span></label>
-            <label><input type="radio" name="q6" value="1"><span>1 – 5%</span></label>
-            <label><input type="radio" name="q6" value="2"><span>5 – 20%</span></label>
-            <label><input type="radio" name="q6" value="3"><span>+ 20%</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>7. Quel est votre taux de fidélisation ? <span class="opt-note">reviennent après achat</span></legend>
+          <legend>7. Quel est votre taux de conversion ?</legend>
           <div class="quiz__opts">
             <label><input type="radio" name="q7" value="nsp"><span>Je ne sais pas</span></label>
-            <label><input type="radio" name="q7" value="0"><span>Moins de 10%</span></label>
-            <label><input type="radio" name="q7" value="1"><span>10 – 30%</span></label>
-            <label><input type="radio" name="q7" value="2"><span>30 – 50%</span></label>
-            <label><input type="radio" name="q7" value="3"><span>+ 50%</span></label>
+            <label><input type="radio" name="q7" value="0"><span>Moins de 1%</span></label>
+            <label><input type="radio" name="q7" value="1"><span>1 – 5%</span></label>
+            <label><input type="radio" name="q7" value="2"><span>5 – 20%</span></label>
+            <label><input type="radio" name="q7" value="3"><span>+ 20%</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>8. Quel est votre panier moyen ?</legend>
+          <legend>8. Comment arrivent vos clients ?</legend>
           <div class="quiz__opts">
-            <label><input type="radio" name="q8" value="0"><span>Moins de 20€</span></label>
-            <label><input type="radio" name="q8" value="1"><span>20 – 100€</span></label>
-            <label><input type="radio" name="q8" value="2"><span>100 – 1 000€</span></label>
-            <label><input type="radio" name="q8" value="3"><span>+ 1 000€</span></label>
+            <label><input type="radio" name="q8" value="reseaux"><span>Mes réseaux, mon contenu</span></label>
+            <label><input type="radio" name="q8" value="demarche"><span>Je démarche, je vais les chercher</span></label>
+            <label><input type="radio" name="q8" value="boa"><span>Le bouche-à-oreille, la recommandation</span></label>
+            <label><input type="radio" name="q8" value="passage"><span>Le passage, l'emplacement</span></label>
+            <label><input type="radio" name="q8" value="rien"><span>Ça vient tout seul, rien d'actif de ma part</span></label>
           </div>
         </fieldset>
-        <fieldset class="quiz__q quiz__q--multi" data-group="q9" data-max="2">
-          <legend>9. Comment se modélise votre acquisition client ? <span class="opt-note">2 réponses max</span></legend>
+        <fieldset class="quiz__q">
+          <legend>9. Quel est votre taux de fidélisation ? <span class="opt-note">reviennent après achat</span></legend>
           <div class="quiz__opts">
-            <label><input type="checkbox" name="q9" value="reseaux"><span>Mes réseaux, mon contenu</span></label>
-            <label><input type="checkbox" name="q9" value="boa"><span>Le bouche-à-oreille, la recommandation</span></label>
-            <label><input type="checkbox" name="q9" value="passage"><span>Le passage, l'emplacement</span></label>
-            <label><input type="checkbox" name="q9" value="demarche"><span>Je démarche, je vais les chercher</span></label>
-            <label><input type="checkbox" name="q9" value="rien"><span>Ça vient tout seul, rien d'actif de ma part</span></label>
+            <label><input type="radio" name="q9" value="nsp"><span>Je ne sais pas</span></label>
+            <label><input type="radio" name="q9" value="0"><span>Moins de 10%</span></label>
+            <label><input type="radio" name="q9" value="1"><span>10 – 30%</span></label>
+            <label><input type="radio" name="q9" value="2"><span>30 – 50%</span></label>
+            <label><input type="radio" name="q9" value="3"><span>+ 50%</span></label>
           </div>
         </fieldset>
         <fieldset class="quiz__q">
@@ -197,12 +188,12 @@
           </div>
         </fieldset>
         <fieldset class="quiz__q">
-          <legend>11. Quel est votre client cible, et que lui promettez-vous ? <span class="opt-note">facultatif</span></legend>
-          <input class="quiz__text" type="text" name="q11" maxlength="160" autocomplete="off" placeholder="Ex : je vends du coaching à des créateurs qui veulent vivre de leur contenu.">
+          <legend>11. En une phrase : que devrait devenir votre entreprise d'ici trois ans ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q11" maxlength="200" autocomplete="off" placeholder="Ex : la référence de mon secteur, une marque qui tourne sans moi…">
         </fieldset>
 
         <button class="btn btn--primary" type="submit">Voir la lecture WarTime</button>
-        <p class="lr__hint mono" id="lr-hint" hidden>Répondez à toutes les questions pour voir votre lecture (la dernière est facultative).</p>
+        <p class="lr__hint mono" id="lr-hint" hidden>Répondez aux questions à choix pour voir votre lecture (les questions ouvertes sont facultatives).</p>
       </form>
 
       <div class="lecture-result" id="lecture-result" hidden>

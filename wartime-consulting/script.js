@@ -188,146 +188,153 @@
        + la maturité du système : dépendante → structurée → scalable.
        ===================================================================== */
 
-    /* Ce que vous cherchez à construire — l'ambition, reformulée. */
+    /* Ce que vous cherchez à construire — l'ambition (q1). */
     function poursuit(v) {
       return {
-        sansmoi: "Une entreprise qui tourne sans vous.",
-        marque:  "Une marque, une référence dans votre secteur.",
-        scaler:  "Changer d'échelle, franchir un vrai palier.",
-        vivre:   "Une activité qui vous fait vivre sereinement."
+        reference: "Faire de votre entreprise une référence.",
+        scale:     "Changer d'échelle.",
+        sansmoi:   "Construire quelque chose qui ne dépend plus de vous.",
+        lancement: "Réussir un lancement, un nouveau pari."
       }[v.q1] || "Passer votre prochain cap.";
     }
 
-    /* Les contradictions possibles, par ordre de gravité. Le moteur les
-       teste TOUTES : il en révèle une (la dominante) et tease les autres.
-       Le cerveau veut la suite — c'est ce qui donne envie du diagnostic. */
-    var DETECTORS = [
-      { // 1. Le fondateur contredit l'entreprise qu'il dit vouloir.
-        label: "La dépendance au fondateur",
-        test: function (v) {
-          var g = v.q2, veut = (v.q1 === "scaler" || v.q1 === "sansmoi" || v.q1 === "marque");
-          return veut && (has(g, "produire") || has(g, "ops"));
-        },
-        build: function (v) {
-          var g = v.q2, fait = [];
-          if (has(g, "produire")) fait.push("vous produisez encore");
-          if (has(g, "ops")) fait.push("vous gérez l'opérationnel");
-          fait.push("vous gardez les décisions");
-          var liste = fait.join(", ").replace(/,([^,]*)$/, " et$1");
-          var vise = poursuit(v).toLowerCase().replace(/\.$/, "");
-          return {
-            racontent: "Vous dites viser « " + vise + " ». Pourtant, " + liste +
-              ". Aujourd'hui, votre organisation raconte l'inverse de votre ambition.",
-            produit: "Vous travaillez davantage chaque année sans créer davantage de liberté. Votre croissance reste plafonnée par votre présence.",
-            suite: "Votre organisation, votre acquisition et votre modèle — pour comprendre d'où vient cette dépendance, et concevoir le système qui s'en libère."
-          };
-        }
-      },
-      { // 2. Le chiffre d'affaires contredit la marge.
-        label: "La valeur qui fuit",
-        test: function (v) { return +v.q4 >= 2 && v.q5 === "0"; },
-        build: function () { return {
-          racontent: "Votre chiffre d'affaires dit que ça marche. Votre marge dit le contraire. Les deux ne peuvent pas avoir raison en même temps.",
-          produit: "Vous produisez du volume, pas de la valeur. Plus vous grossissez à ce rythme, plus l'écart se creuse.",
-          suite: "Votre structure de coûts et votre modèle de prix — pour voir précisément où la valeur se perd."
-        }; }
-      },
-      { // 3. Le discours contredit les données.
-        label: "Le pilotage à l'aveugle",
-        test: function (v) { return v.q5 === "nsp"; },
-        build: function () { return {
-          racontent: "Vous savez où vous voulez aller, mais vous ne connaissez pas votre marge nette. Vous dirigez sur un tableau de bord auquel il manque l'aiguille principale.",
-          produit: "Chaque décision se prend à l'estime. Certaines vous coûtent sans que vous le voyiez.",
-          suite: "Vos chiffres réels — pour remettre l'aiguille et décider sur du concret, pas sur une impression."
-        }; }
-      },
-      { // 4. Les ventes contredisent l'audience.
-        label: "L'attention sans la vente",
-        test: function (v) { return +v.q3 >= 2 && (+v.q4 <= 1 || v.q6 === "0" || v.q6 === "nsp"); },
-        build: function () { return {
-          racontent: "Votre audience grandit. Vos ventes, non. Ce que vous publiez attire — mais pas ceux qui achètent.",
-          produit: "Vous alimentez une audience venue pour du gratuit. L'attention monte ; la valeur créée ne se transforme pas en revenus.",
-          suite: "Votre offre et votre proposition de valeur — parce que le prochain cap n'est pas plus de contenu, c'est une offre qui convertit."
-        }; }
-      },
-      { // 5. La conversion contredit la rétention.
-        label: "Le réservoir percé",
-        test: function (v) { return (v.q6 === "2" || v.q6 === "3") && (v.q7 === "0" || v.q7 === "nsp"); },
-        build: function () { return {
-          racontent: "Vous convertissez, mais personne ne revient. Votre acquisition fonctionne ; votre entreprise, elle, ne retient pas la valeur qu'elle crée.",
-          produit: "Vous remplissez un réservoir percé : chaque mois repart de zéro, et la croissance coûte de plus en plus cher.",
-          suite: "Votre produit et votre expérience après l'achat — là où se joue vraiment la rétention."
-        }; }
-      },
-      { // 6. L'ambition d'échelle contredit le panier.
-        label: "Le modèle sous l'ambition",
-        test: function (v) { return (v.q1 === "scaler" || v.q1 === "sansmoi") && +v.q8 <= 1; },
-        build: function () { return {
-          racontent: "Vous voulez changer d'échelle, mais à ce panier il vous faudrait un volume que votre modèle ne peut pas porter.",
-          produit: "Vous courez pour rester immobile : plus de clients, autant de fatigue, peu de marge.",
-          suite: "Votre offre et votre positionnement prix — pour monter en valeur avant de pousser le volume."
-        }; }
-      },
-      { // 7. Vouloir grandir contredit une acquisition passive.
-        label: "La croissance passive",
-        test: function (v) {
-          var veut = (v.q1 === "scaler" || v.q1 === "sansmoi" || v.q1 === "marque");
-          var actif = has(v.q9, "reseaux") || has(v.q9, "demarche");
-          return veut && (has(v.q9, "rien") || (!actif && (has(v.q9, "boa") || has(v.q9, "passage"))));
-        },
-        build: function () { return {
-          racontent: "Vous voulez grandir, mais rien, aujourd'hui, ne va chercher le client. Votre croissance dépend de ce qui vient tout seul.",
-          produit: "Vous êtes à la merci d'un canal que vous ne commandez pas. Le jour où il ralentit, vous n'avez aucun relais.",
-          suite: "Votre acquisition — pour construire un canal que vous actionnez, au lieu de le subir."
-        }; }
-      },
-      { // 8. Pas encore de signal.
-        label: "L'absence de signal",
-        test: function (v) { return +v.q3 <= 1 && +v.q4 <= 1; },
-        build: function () { return {
-          racontent: "Vous cherchez à passer un cap, mais aucun canal ne ramène de clients de façon répétable. Il n'y a pas encore de système à optimiser.",
-          produit: "Sans signal clair, chaque effort part dans une direction différente. L'énergie se disperse.",
-          suite: "Votre tout premier canal d'acquisition — trouver celui qui ramène, avant tout le reste."
-        }; }
+    /* Les tensions lues dans les FAITS, indépendamment de ce que le
+       dirigeant croit. Servent à nommer « les autres mécanismes ». */
+    function signals(v) {
+      var s = [], ca = +v.q5, marge = v.q6, conv = v.q7, acq = v.q8, fid = v.q9, team = v.q10;
+      if (marge === "nsp") s.push({ key: "marge", label: "Le pilotage à l'aveugle" });
+      else if (marge === "0" && ca >= 2) s.push({ key: "marge", label: "La valeur qui fuit" });
+      if (conv === "0" || conv === "nsp") s.push({ key: "conv", label: "L'attention sans la vente" });
+      if (fid === "0" || fid === "nsp") s.push({ key: "fid", label: "Le réservoir percé" });
+      if (acq === "rien" || acq === "boa" || acq === "passage") s.push({ key: "acq", label: "La croissance passive" });
+      if (v.q1 === "sansmoi" && (team === "solo" || team === "petite")) s.push({ key: "founder", label: "La dépendance au fondateur" });
+      return s;
+    }
+
+    /* Le cœur : confronter ce que le dirigeant CROIT (q2) à ce que ses
+       FAITS racontent. Renvoie { verdict, racontent, produit, suite, primary }. */
+    function readContradiction(v, sig) {
+      function on(k) { return sig.some(function (s) { return s.key === k; }); }
+      var perc = v.q2;
+
+      if (perc === "clients") {
+        if (on("fid")) return { primary: "fid",
+          verdict: "Vous remplissez un réservoir percé.",
+          racontent: "Vous croyez manquer de clients. Vos chiffres disent l'inverse : vous en trouvez, mais vous les perdez. Peu reviennent.",
+          produit: "Vous rachetez chaque mois la croissance du mois précédent. Remplir un réservoir qui fuit coûte de plus en plus cher.",
+          suite: "Votre produit et l'expérience après l'achat — là où se joue la rétention, pas l'acquisition." };
+        if (on("conv")) return { primary: "conv",
+          verdict: "Ce n'est pas le volume. C'est l'offre.",
+          racontent: "Vous croyez manquer de clients. En réalité, ceux qui vous découvrent n'achètent pas. Le problème n'est pas d'en attirer davantage.",
+          produit: "Vous poussez l'acquisition pour compenser une offre qui ne transforme pas : l'entonnoir se remplit par le haut et fuit par le bas.",
+          suite: "Votre offre et sa promesse — pourquoi ceux qui vous trouvent devraient acheter, maintenant." };
+        if (on("acq")) return { primary: "acq",
+          verdict: "Vous attendez le client.",
+          racontent: "Vous croyez manquer de clients, mais rien, aujourd'hui, ne va les chercher. Votre acquisition attend qu'ils viennent.",
+          produit: "Votre croissance dépend de ce qui vient tout seul. Le jour où ça ralentit, vous n'avez aucun relais.",
+          suite: "Un canal d'acquisition que vous actionnez, au lieu de le subir." };
+        return { primary: null,
+          verdict: "Le manque n'est pas là où vous le cherchez.",
+          racontent: "Vous croyez manquer de clients ; vos chiffres ne le confirment pas vraiment. Le manque est ailleurs — dans ce que vous vendez, ou à qui.",
+          produit: "Tant que le vrai manque n'est pas nommé, en chercher davantage ne fait que déplacer le problème.",
+          suite: "Ce que vos meilleurs clients achètent réellement — et ce qui, dans votre offre, s'en éloigne." };
       }
-    ];
 
-    /* Cohérent en surface : aucune contradiction majeure. */
-    var COHERENT = {
-      racontent: "Vos réponses ne révèlent pas de contradiction majeure : ambition, chiffres et quotidien racontent à peu près la même histoire.",
-      produit: "C'est souvent à ce stade que le prochain palier se joue dans des détails invisibles de l'extérieur.",
-      suite: "Vos chiffres détaillés et votre organisation — pour trouver le point de levier exact."
-    };
+      if (perc === "offre") {
+        if ((v.q7 === "2" || v.q7 === "3") && on("fid")) return { primary: "fid",
+          verdict: "Votre offre convertit. Elle ne retient pas.",
+          racontent: "Vous accusez votre offre. Elle convertit pourtant. Ce qui casse est en aval : on achète une fois, on ne revient pas.",
+          produit: "Votre promesse dépasse ce que vous livrez. Chaque client coûte à acquérir, aucun ne compose dans le temps.",
+          suite: "L'expérience après l'achat et la tenue de votre promesse — là où se perd la rétention." };
+        if (on("acq")) return { primary: "acq",
+          verdict: "Le problème n'est pas l'offre. C'est qui la voit.",
+          racontent: "Ce n'est peut-être pas votre offre. Personne ne va la présenter aux bonnes personnes : votre acquisition ne travaille pas.",
+          produit: "Une bonne offre sans canal ressemble à une mauvaise offre — le résultat est le même : ça ne vend pas.",
+          suite: "Votre acquisition, et l'adéquation entre le canal et ceux à qui l'offre est destinée." };
+        return { primary: null,
+          verdict: "Souvent, un problème d'offre est un problème de positionnement.",
+          racontent: "Votre offre est peut-être en cause. Mais ce qu'on prend pour un problème d'offre est souvent un problème de positionnement : à qui parlez-vous, et pourquoi vous ?",
+          produit: "Une offre qui parle à tout le monde ne convainc personne fortement. Elle plaît, sans jamais s'imposer.",
+          suite: "Votre positionnement — pour qui, précisément, êtes-vous le bon choix." };
+      }
 
-    /* La phrase à retenir — le verdict qu'on screenshotte et qu'on partage. */
-    var VERDICT = {
-      "La dépendance au fondateur": "Vous vous êtes créé un job, pas une entreprise.",
-      "La valeur qui fuit": "Vous travaillez pour le décor.",
-      "Le pilotage à l'aveugle": "Vous dirigez à l'aveugle.",
-      "L'attention sans la vente": "Vous avez l'attention. Pas la vente.",
-      "Le réservoir percé": "Vous remplissez un réservoir percé.",
-      "Le modèle sous l'ambition": "Vous courez pour rester immobile.",
-      "La croissance passive": "Vous attendez le client. Une entreprise va le chercher.",
-      "L'absence de signal": "Pas encore de système. Juste des efforts."
-    };
-    var VERDICT_COHERENT = "Vos fondations tiennent. Le vrai levier est plus fin.";
+      if (perc === "orga") {
+        if (on("founder")) return { primary: "founder",
+          verdict: "Le système, c'est vous.",
+          racontent: "Votre organisation ne suit plus parce qu'elle repose encore entièrement sur vous. Ce n'est pas un problème de process.",
+          produit: "Chaque décision remonte à vous. L'entreprise a votre capacité pour plafond — et votre présence pour condition.",
+          suite: "Ce qui doit pouvoir se décider sans vous, et le système qui le permet." };
+        if (on("marge")) return { primary: "marge",
+          verdict: "Vous réorganisez ce qui perd déjà de la valeur.",
+          racontent: "Vous accusez l'organisation. Vos chiffres pointent plus haut : la valeur se perd avant l'exécution, dans votre modèle ou vos prix.",
+          produit: "Mieux organiser une activité peu rentable la rend simplement efficace à perdre de l'argent.",
+          suite: "Votre modèle et vos marges — avant de toucher à l'organisation." };
+        if (on("conv") || on("fid")) return { primary: on("conv") ? "conv" : "fid",
+          verdict: "On ne réorganise pas une demande qui ne tient pas.",
+          racontent: "Ce que vous prenez pour un problème d'organisation est, en amont, un problème d'offre ou de rétention.",
+          produit: "Structurer autour d'une demande fragile ne fait que figer la fragilité.",
+          suite: "L'offre et la rétention d'abord ; l'organisation ensuite." };
+        return { primary: null,
+          verdict: "L'organisation est-elle le problème, ou le symptôme ?",
+          racontent: "L'organisation est peut-être en cause. Reste à savoir si elle est le problème — ou le symptôme d'une décision plus ancienne qu'on n'a jamais rouverte.",
+          produit: "On empile des règles pour compenser une décision de départ qu'on n'ose plus revoir.",
+          suite: "La décision fondatrice derrière votre organisation actuelle." };
+      }
 
-    /* Teste toutes les contradictions ; renvoie celles qui se déclenchent. */
-    function detect(v) {
-      var out = [];
-      DETECTORS.forEach(function (d) { if (d.test(v)) out.push(d); });
-      return out;
+      if (perc === "position") {
+        if (v.q7 === "2" || v.q7 === "3") return { primary: null,
+          verdict: "Pas un problème de force. De clarté.",
+          racontent: "Votre positionnement convertit encore. Le problème n'est peut-être pas d'être plus fort, mais plus clair : pour qui, précisément, êtes-vous le bon choix ?",
+          produit: "Un positionnement flou fait travailler deux fois plus pour convaincre — et attire les mauvais clients.",
+          suite: "Le client pour qui vous êtes une évidence, et tout ce qui, aujourd'hui, le dilue." };
+        if ((v.q1 === "reference" || v.q1 === "scale") && on("marge")) return { primary: "marge",
+          verdict: "Vous visez le haut avec les prix du milieu.",
+          racontent: "Vous voulez monter ; vos marges disent que votre positionnement communique encore « accessible ». L'ambition et les prix ne racontent pas la même histoire.",
+          produit: "Vous portez les coûts du premium sans en toucher la valeur. L'écart se paie en marge.",
+          suite: "Votre positionnement prix — l'aligner sur ce que vous voulez devenir." };
+        return { primary: null,
+          verdict: "Dites-vous la même chose que ce qu'on vient chercher ?",
+          racontent: "Le positionnement est le bon terrain. La vraie question : votre entreprise dit-elle la même chose que ce que vos meilleurs clients viennent y chercher ?",
+          produit: "Quand le discours et la raison réelle d'achat divergent, on attire du monde — rarement les bons.",
+          suite: "L'écart entre ce que vous dites être et ce pour quoi on vous choisit vraiment." };
+      }
+
+      // perc === "nsp" — le client idéal : on nomme le premier signe.
+      if (v.q6 === "nsp") return { primary: "marge",
+        verdict: "Vous dirigez sans l'instrument principal.",
+        racontent: "Vous sentez que quelque chose cloche sans le nommer. Premier signe : vous ne connaissez pas votre marge. On ne corrige pas ce qu'on ne mesure pas.",
+        produit: "Chaque décision se prend à l'estime. Certaines vous coûtent sans que vous le voyiez.",
+        suite: "Vos chiffres réels — remettre l'aiguille avant de chercher plus loin." };
+      if (on("fid")) return { primary: "fid",
+        verdict: "Le problème est après la vente.",
+        racontent: "Vous sentez que quelque chose cloche sans le nommer. Un signe fort : vos clients ne reviennent pas. Le problème se cache souvent là où on ne regarde plus — après l'achat.",
+        produit: "Vous rachetez chaque mois la croissance perdue. C'est épuisant, et invisible dans le chiffre du mois.",
+        suite: "Ce qui se passe après la première vente : la rétention." };
+      if (on("conv")) return { primary: "conv",
+        verdict: "Vous avez l'attention. Pas la vente.",
+        racontent: "Vous sentez que quelque chose cloche sans le nommer. Un signe : beaucoup vous découvrent, peu achètent. Le problème est dans l'offre, pas dans l'effort.",
+        produit: "Vous alimentez le haut de l'entonnoir pour compenser un milieu qui ne transforme pas.",
+        suite: "Votre offre et sa promesse — pourquoi acheter, et maintenant." };
+      if (on("acq")) return { primary: "acq",
+        verdict: "Votre croissance dépend du hasard.",
+        racontent: "Vous sentez que quelque chose cloche sans le nommer. Un signe : rien ne va chercher le client. Votre croissance dépend de ce qui vient tout seul.",
+        produit: "Sans canal que vous actionnez, chaque bon mois est un coup de chance — et chaque mauvais, une énigme.",
+        suite: "Un canal d'acquisition que vous contrôlez." };
+      return { primary: null,
+        verdict: "Vos chiffres ne hurlent pas. C'est justement le sujet.",
+        racontent: "Vous sentez que quelque chose cloche sans arriver à le nommer — et vos chiffres ne crient rien de flagrant. La contradiction est plus fine : entre ce que vous voulez devenir et ce que votre entreprise fait vraiment.",
+        produit: "C'est le cas le plus fréquent chez ceux qui réussissent déjà : le problème n'est pas visible de l'intérieur.",
+        suite: "L'écart entre votre ambition, votre récit et vos actes — exactement ce qu'un regard extérieur voit." };
     }
 
     /* Maturité du système : une étape, pas un score. 0/1/2. */
     function maturity(v) {
-      var jours = v.q2, handsIn = has(jours, "produire") || has(jours, "ops"),
-          pil = has(jours, "piloter");
-      var team = v.q10, ownsChannel = has(v.q9, "reseaux") || has(v.q9, "demarche");
-      var conv = v.q6, fid = v.q7;
+      var team = v.q10, conv = v.q7, fid = v.q9, acq = v.q8;
+      var dependant = (team === "solo" || team === "petite") && (v.q1 === "sansmoi" || v.q2 === "orga");
       var moteurSain = (conv === "2" || conv === "3") && (fid === "2" || fid === "3");
-      if (handsIn && (team === "solo" || team === "petite")) return 0; // dépendante
-      if (pil && ownsChannel && moteurSain && (team === "moyenne" || team === "grande")) return 2; // scalable
+      var canalActif = (acq === "reseaux" || acq === "demarche");
+      if (dependant) return 0; // dépendante
+      if (moteurSain && canalActif && (team === "moyenne" || team === "grande")) return 2; // scalable
       return 1; // structurée
     }
     var STAGE_CAP = [
@@ -337,8 +344,8 @@
     ];
 
     var hint = document.getElementById("lr-hint");
-    var radios = ["q1", "q3", "q4", "q5", "q6", "q7", "q8", "q10"];
-    var groups = ["q2", "q9"];
+    var radios = ["q1", "q2", "q5", "q6", "q7", "q8", "q9", "q10"];
+    var groups = [];
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -358,31 +365,27 @@
 
       var v = {};
       radios.forEach(function (n) { v[n] = val(n); });
-      v.q2 = multi("q2");
-      v.q9 = multi("q9");
-      var textEl = form.querySelector('[name="q11"]');
-      v.q11 = textEl ? textEl.value : "";
+      function txt(n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value : ""; }
+      v.q3 = txt("q3"); v.q4 = txt("q4"); v.q11 = txt("q11");
 
-      // On détecte TOUT, on révèle UNE (la dominante), on tease le reste.
-      var found = detect(v);
-      var dominant = found.length ? found[0] : null;
-      var c = dominant ? dominant.build(v) : COHERENT;
-      document.getElementById("lr-headline").textContent = dominant ? VERDICT[dominant.label] : VERDICT_COHERENT;
+      // On confronte ce que le dirigeant CROIT (q2) à ce que ses FAITS racontent.
+      var sig = signals(v);
+      var c = readContradiction(v, sig);
+      document.getElementById("lr-headline").textContent = sig.length ? c.verdict : "Honnêtement, rien ne se contredit assez fort.";
       document.getElementById("lr-poursuit").textContent = poursuit(v);
       document.getElementById("lr-contradiction").textContent = c.racontent;
       document.getElementById("lr-produit").textContent = c.produit;
       document.getElementById("lr-suite").textContent = c.suite;
 
-      // Le compteur qui crée la tension : « N contradictions, nous n'en révélons qu'une ».
-      var others = found.slice(1);
+      // Le compteur qui crée la tension.
+      var others = sig.filter(function (s) { return s.key !== c.primary; });
       var countEl = document.getElementById("lr-count");
-      if (found.length >= 2) {
-        countEl.textContent = "Vos réponses révèlent " + found.length +
-          " contradictions. Nous n'en ouvrons qu'une ici — celle qui produit le plus de conséquences.";
-      } else if (found.length === 1) {
-        countEl.textContent = "Vos réponses révèlent une contradiction centrale — celle qui produit le plus de conséquences.";
+      if (sig.length === 0) {
+        countEl.textContent = "Ce que vous pensez et ce que vos chiffres montrent racontent à peu près la même histoire. Nous ne voyons pas, ici, de contradiction assez importante pour justifier un diagnostic payant.";
+      } else if (sig.length >= 2) {
+        countEl.textContent = "Vos réponses révèlent " + sig.length + " tensions. Nous n'en ouvrons qu'une ici — celle qui pèse le plus.";
       } else {
-        countEl.textContent = "Vos réponses ne révèlent pas de contradiction évidente. Le blocage, s'il existe, se joue dans le détail.";
+        countEl.textContent = "Vos réponses pointent une tension centrale — celle qui pèse le plus.";
       }
 
       // Les autres mécanismes : nommés, jamais détaillés. Le cerveau veut la suite.
@@ -394,9 +397,13 @@
           ? "Un autre mécanisme détecté" : (others.length + " autres mécanismes détectés");
         lockList.innerHTML = others.map(function (o) { return "<li>" + o.label + "</li>"; }).join("");
         lockLine.textContent = "Volontairement non détaillés ici. C'est le Diagnostic WarTime qui les ouvre — et qui montre comment ils se tiennent.";
+      } else if (sig.length === 0) {
+        lockLabel.textContent = "Notre parti pris";
+        lockList.innerHTML = "<li>Nous préférons vous le dire plutôt que vous vendre un diagnostic dont vous n'avez pas besoin.</li>";
+        lockLine.textContent = "Revenez le jour où quelque chose coince sans que vous arriviez à voir quoi.";
       } else {
         lockLabel.textContent = "Ce que nous ne savons pas encore";
-        lockList.innerHTML = "<li>Vos chiffres détaillés, votre agenda, votre acquisition, votre offre.</li>";
+        lockList.innerHTML = "<li>Vos chiffres détaillés, votre organisation, votre offre, votre récit.</li>";
         lockLine.textContent = "C'est précisément ce qui sépare cette lecture du Diagnostic WarTime.";
       }
 
@@ -410,9 +417,18 @@
       });
       document.getElementById("lr-stage-cap").textContent = STAGE_CAP[m];
 
+      // Le CTA s'adapte : pas de contradiction → pas de vente forcée.
+      var payBtn = document.getElementById("lr-pay");
+      if (payBtn) payBtn.textContent = sig.length ? "Le Diagnostic WarTime — 990 €" : "Nous écrire quand quelque chose coince";
+
+      // On reprend ses mots : ce qui vous a mené ici devient ce qui vous retient.
       var echo = document.getElementById("lr-echo");
-      if (v.q11 && v.q11.trim()) {
-        echo.textContent = "Vous ciblez : « " + v.q11.trim() + " ». Le Diagnostic WarTime vérifie si vos chiffres racontent la même histoire.";
+      var q4 = (v.q4 || "").trim(), q11 = (v.q11 || "").trim();
+      if (q4) {
+        echo.textContent = "Vous dites que votre succès vient de « " + q4 + " ». Souvent, ce qui vous a mené jusqu'ici devient exactement ce qui vous retient.";
+        echo.hidden = false;
+      } else if (q11) {
+        echo.textContent = "Vous visez : « " + q11 + " ». Le Diagnostic WarTime vérifie si vos actes racontent déjà cette histoire.";
         echo.hidden = false;
       } else {
         echo.hidden = true;
