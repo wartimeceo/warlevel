@@ -327,6 +327,17 @@
         suite: "L'écart entre votre ambition, votre récit et vos actes — exactement ce qu'un regard extérieur voit." };
     }
 
+    /* Le pari — une prédiction falsifiable, sur un comportement qu'on n'a
+       PAS demandé. C'est le moment « comment ils savent ça ? ». */
+    var PARI = {
+      fid:     "Nous parions que votre meilleur mois et votre pire mois tiennent aux mêmes quelques clients — et que vous ne sauriez pas dire, aujourd'hui, lesquels reviendront.",
+      conv:    "Nous parions que vous avez déjà baissé un prix ou ajouté une option en espérant convertir davantage. Ça n'a presque rien changé.",
+      acq:     "Nous parions que vous ne pouvez pas expliquer précisément pourquoi un bon mois est un bon mois. Il arrive, c'est tout.",
+      marge:   "Nous parions qu'au moins une chose que vous vendez vous fait perdre de l'argent — sans que vous le voyiez passer.",
+      founder: "Nous parions que les trois dernières décisions qui comptaient sont toutes repassées par vous."
+    };
+    var PARI_DEFAULT = "Nous parions que si nous demandions à vos cinq meilleurs clients pourquoi ils vous choisissent, leur réponse ne serait pas celle que vous venez d'écrire.";
+
     /* Maturité du système : une étape, pas un score. 0/1/2. */
     function maturity(v) {
       var team = v.q10, conv = v.q7, fid = v.q9, acq = v.q8;
@@ -376,6 +387,15 @@
       document.getElementById("lr-contradiction").textContent = c.racontent;
       document.getElementById("lr-produit").textContent = c.produit;
       document.getElementById("lr-suite").textContent = c.suite;
+
+      // Le pari : on l'affiche seulement s'il y a une vraie tension à lire.
+      var pariBlock = document.getElementById("lr-pari-block");
+      if (sig.length) {
+        document.getElementById("lr-pari").textContent = PARI[c.primary] || PARI_DEFAULT;
+        pariBlock.hidden = false;
+      } else {
+        pariBlock.hidden = true;
+      }
 
       // Le compteur qui crée la tension.
       var others = sig.filter(function (s) { return s.key !== c.primary; });

@@ -598,6 +598,14 @@ section { position: relative; z-index: 1; }
 .lr__block--key { border-top-color: var(--blood); }
 .lr__block--key .mono { color: var(--blood); }
 .lr__block--key p { font-weight: 500; }
+
+/* Le pari — l'insight qu'on n'a pas demandé. Lu comme une affirmation. */
+.lr__block--bet { border-top-color: var(--blood); }
+.lr__block--bet .mono { color: var(--blood); }
+.lr__block--bet p {
+  font-family: var(--display); font-weight: 500;
+  font-size: 1.16rem; line-height: 1.38; letter-spacing: -.005em;
+}
 .lr__headline {
   font-family: var(--display);
   font-weight: 700; font-stretch: 112%;
