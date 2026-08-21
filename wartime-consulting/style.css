@@ -542,6 +542,24 @@ section { position: relative; z-index: 1; }
 .quiz .btn[type="submit"] { margin-top: 6px; }
 .lr__hint { display: block; margin-top: 14px; color: var(--blood); letter-spacing: .12em; }
 
+/* Déclaration plein cadre — le cœur du positionnement. */
+.statement { padding-top: 13vh; padding-bottom: 13vh; }
+.statement__line {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.9rem, 5.2vw, 3.4rem); line-height: 1.06;
+  letter-spacing: -.018em; margin: 0; max-width: 22ch; text-wrap: balance;
+}
+.statement__line--turn { color: var(--blood); font-weight: 500; font-style: italic; margin-top: .18em; }
+
+/* Liste de contradictions (PL.01). */
+.contras { list-style: none; margin: 34px 0; padding: 0; max-width: 62ch; }
+.contras li {
+  padding: 18px 0; border-top: 1px solid var(--line);
+  font-size: 1.1rem; line-height: 1.5;
+}
+.contras li:last-child { border-bottom: 1px solid var(--line); }
+.contras b { font-weight: 700; }
+
 .lecture-result { margin: 44px 0 0; max-width: 700px; }
 .lr__eyebrow { display: block; color: var(--blood); margin-bottom: 10px; }
 .lr__count {
