@@ -439,7 +439,7 @@
 
       // Le CTA s'adapte : pas de contradiction → pas de vente forcée.
       var payBtn = document.getElementById("lr-pay");
-      if (payBtn) payBtn.textContent = sig.length ? "Le Diagnostic WarTime — 990 €" : "Nous écrire quand quelque chose coince";
+      if (payBtn) payBtn.textContent = sig.length ? "Le Diagnostic WarTime — 490 €" : "Nous écrire quand quelque chose coince";
 
       // On reprend ses mots : ce qui vous a mené ici devient ce qui vous retient.
       var echo = document.getElementById("lr-echo");
