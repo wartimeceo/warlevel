@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WarTime Consulting — WarTime Way</title>
+  <meta name="description" content="Toutes les entreprises atteignent un plafond. Les meilleures changent de système avant de chercher à travailler davantage. WarTime Way : identifier ce qui vous plafonne, concevoir le prochain cap.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WarTime Consulting — WarTime Way">
+  <meta property="og:description" content="Toutes les entreprises atteignent un plafond. Les meilleures changent de système avant de chercher à travailler davantage. Nous identifions ce qui vous plafonne et concevons le prochain cap.">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="WarTime Consulting">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M12%201.5L22.5%2012L12%2022.5L1.5%2012Z%27%20fill%3D%27none%27%20stroke%3D%27%231A6E4A%27%20stroke-width%3D%271.7%27/%3E%3Cpath%20d%3D%27M12%203.5L16.5%2012L7.5%2012Z%27%20fill%3D%27%231A6E4A%27/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a class="nav__brand" href="#top">
+        <svg class="brand-mark" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 1.5 L22.5 12 L12 22.5 L1.5 12 Z" stroke="#1A6E4A" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M12 3.5 L16.5 12 L7.5 12 Z" fill="#1A6E4A"/>
+        </svg>
+        <span>WarTime Consulting</span>
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#probleme">Le problème</a></li>
+        <li><a href="#methode">WarTime Way</a></li>
+        <li><a href="#offres">Les offres</a></li>
+        <li><a href="#qui">Pourquoi nous</a></li>
+        <li><a href="#doctrine">La doctrine</a></li>
+        <li><a class="nav__cta" href="#test">Commencer</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero" id="hero">
+    <div class="hero__inner">
+      <span class="hero__rule hero__rule--left" aria-hidden="true"></span>
+      <span class="hero__rule hero__rule--right" aria-hidden="true"></span>
+      <span class="hero__rule-label hero__rule-label--left mono" aria-hidden="true">Ce que vous avez</span>
+      <span class="hero__rule-label hero__rule-label--right mono" aria-hidden="true">Ce que vous pourriez avoir</span>
+
+      <div class="hero__dim" aria-hidden="true">
+        <span class="hero__dim-line"></span>
+        <span class="hero__dim-word">Le cap</span>
+      </div>
+
+      <div class="hero__content">
+        <h1>Vous prenez peut-être les bonnes décisions.<br><em>Pour le mauvais problème.</em></h1>
+
+        <div class="hero__sub">
+          <p>Un dirigeant voit son entreprise de l'intérieur. Nous cherchons ce qu'il ne voit plus : la contradiction entre ce qu'il veut construire, ce qu'il fait réellement et ce que son entreprise raconte.</p>
+          <p>Parce que vous n'avez probablement pas le problème que vous pensez avoir.</p>
+        </div>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#test">Faire le diagnostic</a>
+        </div>
+
+        <p class="mono hero__stamp">WarTime Consulting — Direction stratégique — Paris</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       DÉCLARATION — le cœur du positionnement
+       ========================================================= -->
+  <section class="sec statement">
+    <div class="wrap">
+      <p class="statement__line reveal">Vous connaissez votre entreprise mieux que nous.</p>
+      <p class="statement__line statement__line--turn reveal">C'est précisément le problème.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LECTURE EXPRESS — moteur de règles (méthode WarTime)
+       ========================================================= -->
+  <section class="sec" id="test">
+    <div class="wrap">
+      <span class="plate mono">Diagnostic express · 1 minute</span>
+      <h2 class="reveal">Quel problème essayez-vous vraiment de résoudre ?</h2>
+      <p class="lede reveal">Onze questions. Nous confrontons ce que vous pensez de votre entreprise à ce que votre entreprise raconte réellement. Pas de score sur 100. Pas de test de personnalité. Une première lecture.</p>
+
+      <form class="quiz reveal" id="lecture" novalidate>
+        <fieldset class="quiz__q">
+          <legend>1. Quel est votre prochain cap ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q1" value="reference"><span>Faire de mon entreprise une référence</span></label>
+            <label><input type="radio" name="q1" value="scale"><span>Changer d'échelle</span></label>
+            <label><input type="radio" name="q1" value="sansmoi"><span>Construire quelque chose qui ne dépend plus de moi</span></label>
+            <label><input type="radio" name="q1" value="lancement"><span>Réussir un lancement, un nouveau pari</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>2. Qu'est-ce qui vous empêche de l'atteindre, selon vous ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q2" value="clients"><span>Je manque de clients</span></label>
+            <label><input type="radio" name="q2" value="offre"><span>Mon offre ne convertit plus assez</span></label>
+            <label><input type="radio" name="q2" value="orga"><span>Mon organisation ne suit plus</span></label>
+            <label><input type="radio" name="q2" value="position"><span>Mon positionnement n'est plus assez fort</span></label>
+            <label><input type="radio" name="q2" value="nsp"><span>Je sais qu'il y a un problème, mais je n'arrive pas à l'identifier</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>3. Qu'avez-vous déjà essayé de changer ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q3" maxlength="180" autocomplete="off" placeholder="Ex : j'ai refait mon offre, changé de canal, recruté…">
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>4. Qu'est-ce qui a fait votre succès jusqu'ici ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q4" maxlength="180" autocomplete="off" placeholder="Ex : le bouche-à-oreille, ma présence, la qualité produit…">
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>5. Quel est votre chiffre d'affaires mensuel ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q5" value="0"><span>0 – 1k€</span></label>
+            <label><input type="radio" name="q5" value="1"><span>1k – 5k€</span></label>
+            <label><input type="radio" name="q5" value="2"><span>5k – 20k€</span></label>
+            <label><input type="radio" name="q5" value="3"><span>+ 20k€</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>6. Quelle est votre marge nette ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q6" value="0"><span>Moins de 10%</span></label>
+            <label><input type="radio" name="q6" value="1"><span>10 – 30%</span></label>
+            <label><input type="radio" name="q6" value="2"><span>30 – 50%</span></label>
+            <label><input type="radio" name="q6" value="3"><span>+ 50%</span></label>
+            <label><input type="radio" name="q6" value="nsp"><span>Je ne sais pas</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>7. Quel est votre taux de conversion ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q7" value="nsp"><span>Je ne sais pas</span></label>
+            <label><input type="radio" name="q7" value="0"><span>Moins de 1%</span></label>
+            <label><input type="radio" name="q7" value="1"><span>1 – 5%</span></label>
+            <label><input type="radio" name="q7" value="2"><span>5 – 20%</span></label>
+            <label><input type="radio" name="q7" value="3"><span>+ 20%</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>8. Comment arrivent vos clients ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q8" value="reseaux"><span>Mes réseaux, mon contenu</span></label>
+            <label><input type="radio" name="q8" value="demarche"><span>Je démarche, je vais les chercher</span></label>
+            <label><input type="radio" name="q8" value="boa"><span>Le bouche-à-oreille, la recommandation</span></label>
+            <label><input type="radio" name="q8" value="passage"><span>Le passage, l'emplacement</span></label>
+            <label><input type="radio" name="q8" value="rien"><span>Ça vient tout seul, rien d'actif de ma part</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>9. Quel est votre taux de fidélisation ? <span class="opt-note">reviennent après achat</span></legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q9" value="nsp"><span>Je ne sais pas</span></label>
+            <label><input type="radio" name="q9" value="0"><span>Moins de 10%</span></label>
+            <label><input type="radio" name="q9" value="1"><span>10 – 30%</span></label>
+            <label><input type="radio" name="q9" value="2"><span>30 – 50%</span></label>
+            <label><input type="radio" name="q9" value="3"><span>+ 50%</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>10. Quelle est la taille de votre équipe ?</legend>
+          <div class="quiz__opts">
+            <label><input type="radio" name="q10" value="solo"><span>Je suis seul</span></label>
+            <label><input type="radio" name="q10" value="petite"><span>2 à 5</span></label>
+            <label><input type="radio" name="q10" value="moyenne"><span>6 à 15</span></label>
+            <label><input type="radio" name="q10" value="grande"><span>+ 15</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="quiz__q">
+          <legend>11. En une phrase : que devrait devenir votre entreprise d'ici trois ans ? <span class="opt-note">facultatif</span></legend>
+          <input class="quiz__text" type="text" name="q11" maxlength="200" autocomplete="off" placeholder="Ex : la référence de mon secteur, une marque qui tourne sans moi…">
+        </fieldset>
+
+        <button class="btn btn--primary" type="submit">Voir la lecture WarTime</button>
+        <p class="lr__hint mono" id="lr-hint" hidden>Répondez aux questions à choix pour voir votre lecture (les questions ouvertes sont facultatives).</p>
+      </form>
+
+      <div class="lecture-result" id="lecture-result" hidden>
+        <span class="mono lr__eyebrow">Ce que nous avons trouvé</span>
+        <p class="lr__headline" id="lr-headline" aria-live="polite"></p>
+        <p class="lr__count" id="lr-count" aria-live="polite"></p>
+
+        <div class="lr__stage">
+          <span class="mono">Maturité de votre système</span>
+          <ol class="stage" aria-hidden="true">
+            <li data-k="0"><span>Dépendante</span></li>
+            <li data-k="1"><span>Structurée</span></li>
+            <li data-k="2"><span>Scalable</span></li>
+          </ol>
+          <p class="lr__stage-cap" id="lr-stage-cap" aria-live="polite"></p>
+        </div>
+
+        <div class="lr__block">
+          <span class="mono">Ce que vous cherchez à construire</span>
+          <p id="lr-poursuit"></p>
+        </div>
+        <div class="lr__block lr__block--key">
+          <span class="mono">La contradiction que nous révélons</span>
+          <p id="lr-contradiction"></p>
+        </div>
+        <div class="lr__block">
+          <span class="mono">Ce que cela produit</span>
+          <p id="lr-produit"></p>
+        </div>
+        <div class="lr__block lr__block--bet" id="lr-pari-block">
+          <span class="mono">Notre pari</span>
+          <p id="lr-pari"></p>
+        </div>
+        <div class="lr__block">
+          <span class="mono">Ce que nous regarderions ensuite</span>
+          <p id="lr-suite"></p>
+        </div>
+        <p class="lr__echo" id="lr-echo" hidden></p>
+
+        <div class="lr__locked">
+          <span class="mono" id="lr-lock-label">Les autres mécanismes</span>
+          <ul class="lr__others" id="lr-others"></ul>
+          <p class="lr__locked-line" id="lr-lock-line"></p>
+        </div>
+
+        <div class="lr__cta">
+          <a class="btn btn--primary" id="lr-pay" href="#contact">Le Diagnostic WarTime — 490 €</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LE PROBLÈME — PL. 01
+       ========================================================= -->
+  <section class="sec" id="probleme">
+    <div class="wrap">
+      <span class="plate mono">01 — Le problème</span>
+      <h2 class="reveal">Une entreprise peut fonctionner.<br>Et quand même aller dans la mauvaise direction.</h2>
+
+      <div class="bio reveal" style="max-width:60ch;">
+        <p>Vous avez des clients. Vous travaillez. Vous prenez des décisions. Certaines fonctionnent même très bien. Et pourtant, quelque chose ne colle plus.</p>
+        <p>Vous corrigez l'acquisition. Puis l'offre. Puis l'équipe. Puis le contenu. Le problème bouge. Parce que le problème visible n'est parfois que la conséquence.</p>
+      </div>
+
+      <ul class="contras reveal">
+        <li>Une entreprise peut vouloir devenir <b>premium</b> tout en vendant comme une commodité.</li>
+        <li>Un dirigeant peut vouloir <b>scaler</b> tout en restant indispensable à chaque décision.</li>
+        <li>Une marque peut gagner en <b>audience</b> pendant que son offre s'éloigne exactement de ce que cette audience était venue chercher.</li>
+      </ul>
+
+      <p class="prob__punch reveal">Ce ne sont pas trois problèmes. <span class="blood">Ce sont trois contradictions.</span></p>
+      <p class="method__mid reveal">Et tant que vous corrigez leurs conséquences, <span class="steel">elles continuent d'en produire.</span></p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CE QUE NOUS FAISONS — PL. 02
+       ========================================================= -->
+  <section class="sec" id="methode">
+    <div class="wrap">
+      <span class="plate mono">02 — WarTime Way</span>
+      <h2 class="reveal">Nous ne cherchons pas ce qui ne fonctionne pas.<br>Nous cherchons ce qui se contredit.</h2>
+
+      <div class="bio reveal" style="max-width:60ch;">
+        <p>Votre entreprise raconte plusieurs histoires en même temps. Il y a ce que vous voulez construire. Ce que vous pensez devoir faire. Ce que vous faites réellement. Ce que vos clients comprennent. Et ce que vos chiffres prouvent.</p>
+        <p>Quand tout cela raconte la même histoire, une entreprise avance. Quand deux de ces vérités se contredisent, quelque chose finit par casser. C'est là que nous regardons.</p>
+      </div>
+
+      <div class="two">
+        <div class="two__block reveal">
+          <span class="mono">Ce que vous voyez</span>
+          <p>Une baisse des ventes. Une croissance qui ralentit. Un lancement qui déçoit. Une équipe qui ne suit plus.</p>
+        </div>
+        <div class="two__block reveal">
+          <span class="mono">Ce que nous cherchons</span>
+          <p>La décision, le système, le positionnement ou le récit qui produit cette situation.</p>
+        </div>
+      </div>
+
+      <p class="method__mid reveal">Le symptôme est visible. <span class="steel">La contradiction qui le produit ne l'est pas.</span></p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LE DIAGNOSTIC — PL. 03
+       ========================================================= -->
+  <section class="sec">
+    <div class="wrap">
+      <span class="plate mono">03 — Le diagnostic</span>
+      <h2 class="reveal">Vous venez avec le problème que vous pensez avoir. Vous repartez avec celui qu'il faut réellement résoudre.</h2>
+      <p class="lede reveal">Le Diagnostic WarTime n'est pas un audit. Nous ne cherchons pas à produire le plus gros document possible. Nous cherchons à réduire une entreprise complexe jusqu'à identifier la décision qui compte maintenant.</p>
+
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__num">01</span>
+          <p class="step__title">Vous nous racontez</p>
+          <p>Votre entreprise. Votre ambition. Votre problème. Ce que vous avez déjà essayé.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <p class="step__title">Nous regardons ce qui est vrai</p>
+          <p>Vos chiffres. Votre offre. Votre acquisition. Votre organisation. Votre positionnement. Les faits racontent rarement exactement la même histoire que vous.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <p class="step__title">Nous confrontons les deux</p>
+          <p>Ce que vous pensez être le problème. Ce que votre entreprise nous montre. L'écart entre les deux est souvent là où commence le diagnostic.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <p class="step__title">Vous repartez avec une décision</p>
+          <p>Pas cinquante recommandations. Celle qui rend les quarante-neuf autres inutiles.</p>
+        </div>
+      </div>
+
+      <p class="method__mid reveal">Le diagnostic complet ne sert pas à trouver un autre problème. <span class="steel">Il sert à comprendre précisément pourquoi celui-ci existe, et comment le supprimer.</span></p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LES OFFRES — PL. 04
+       ========================================================= -->
+  <section class="sec" id="offres">
+    <div class="wrap">
+      <span class="plate mono">04 — Les offres</span>
+      <h2 class="reveal">Trois étapes. Une seule logique.</h2>
+      <p class="lede reveal">Nous ne vendons pas de la stratégie pour produire des slides. Nous allons aussi loin dans le problème que sa résolution l'exige. Parfois la réponse est commerciale. Parfois organisationnelle. Parfois elle touche l'offre, le positionnement, la marque, le produit ou la direction artistique. Le problème décide des outils. Pas l'inverse.</p>
+
+      <div class="offers">
+        <div class="offer offer--feature reveal">
+          <div class="offer__name">Le Diagnostic WarTime</div>
+          <div class="offer__price">490 € HT</div>
+          <p class="offer__desc">Pour ceux qui se disent : « j'ai quelque chose entre les mains, ça devrait aller beaucoup plus loin, mais je ne vois pas le coup. » Vous repartez avec ce coup — un seul, précis, jouable par vous et par personne d'autre.</p>
+          <a class="btn btn--primary offer__cta" href="#contact">Commencer</a>
+        </div>
+
+        <div class="offer reveal">
+          <div class="offer__name">L'Architecture WarTime</div>
+          <div class="offer__price">4 500 € HT</div>
+          <p class="offer__desc">Vous savez maintenant ce qui doit changer. Nous concevons ce qui doit le remplacer — nouvelle offre, nouveau système, nouveau positionnement, nouvelle organisation, nouvelle direction. La réponse dépend du diagnostic. Livré en 2 à 3 semaines. Les 490 € du diagnostic sont déduits.</p>
+        </div>
+
+        <div class="offer reveal">
+          <div class="offer__name">La Direction WarTime</div>
+          <div class="offer__price">Au projet</div>
+          <p class="offer__desc">Une bonne stratégie qui reste dans un document ne vaut rien. Nous dirigeons sa mise en œuvre jusqu'à ce que ce qui devait devenir vrai le soit réellement. Stratégie, création, contenu, acquisition, organisation ou exécution selon le projet. Vous gardez l'entreprise. Nous gardons la cohérence.</p>
+        </div>
+      </div>
+
+      <div class="offers-note reveal">
+        <p>Chaque étage est déduit du suivant si vous continuez dans les 60 jours.</p>
+        <p>Vous ne payez jamais deux fois la même étape.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       QUI NOUS SOMMES — PL. 05 (fond sombre)
+       ========================================================= -->
+  <section class="sec sec--dark" id="qui">
+    <div class="wrap">
+      <span class="plate mono">05 — Pourquoi nous</span>
+      <h2 class="reveal">Nous avons construit avant de conseiller.</h2>
+
+      <div class="bio reveal">
+        <p>Nous ne venons pas du conseil. Nous venons du terrain.</p>
+        <p>Nous avons créé des entreprises, lancé des offres, recruté, vendu, perdu de l'argent, pris de mauvaises décisions et construit celles qui ont fonctionné.</p>
+        <p>Nous savons ce qu'une décision stratégique coûte parce que nous les payons aussi.</p>
+      </div>
+
+      <blockquote class="quote reveal">Un consultant qui se trompe change de client. Nous, nous avons construit avec notre propre argent. Nous savons ce qu'une erreur coûte — nous l'avons payée.</blockquote>
+
+      <p class="bio__close reveal">WarTime Way n'est pas une théorie. C'est une façon de penser née en construisant. Pas en observant.</p>
+
+      <p class="mono">WarTime — Paris</p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       POUR QUI — PL. 06
+       ========================================================= -->
+  <section class="sec">
+    <div class="wrap">
+      <span class="plate mono">06 — Pour qui</span>
+      <h2 class="reveal">Nous travaillons avec des entreprises qui ont déjà prouvé quelque chose.</h2>
+
+      <div class="fit">
+        <div class="fit__col fit__col--yes reveal">
+          <h3>Vous êtes au bon endroit si</h3>
+          <ul class="fit__list">
+            <li><span class="fit__mark" aria-hidden="true">&rarr;</span><span>Quelque chose fonctionne déjà.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&rarr;</span><span>Vous avez déjà des clients.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&rarr;</span><span>Vous avez déjà pris des risques et payé certaines erreurs.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&rarr;</span><span>Vous savez où vous voulez aller, mais quelque chose vous empêche d'y aller comme prévu.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&rarr;</span><span>Vous acceptez l'idée que le problème puisse être différent de celui que vous aviez identifié.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&rarr;</span><span>Vous cherchez une direction. Pas une validation.</span></li>
+          </ul>
+        </div>
+        <div class="fit__col fit__col--no reveal">
+          <h3>Ce n'est probablement pas pour vous si vous cherchez</h3>
+          <ul class="fit__list">
+            <li><span class="fit__mark" aria-hidden="true">&times;</span><span>Quelqu'un pour vous motiver à entreprendre.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&times;</span><span>Une identité visuelle isolée.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&times;</span><span>Une campagne isolée.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&times;</span><span>Un site isolé.</span></li>
+            <li><span class="fit__mark" aria-hidden="true">&times;</span><span>Quelqu'un qui exécutera exactement ce que vous avez demandé sans se demander si vous avez demandé la bonne chose.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LA DOCTRINE — PL. 07 (fond sombre)
+       ========================================================= -->
+  <section class="sec sec--dark" id="doctrine">
+    <div class="wrap">
+      <span class="plate mono">07 — WarTime Way</span>
+      <h2 class="reveal">Toute entreprise finit par devenir trop proche d'elle-même pour se voir entièrement.</h2>
+
+      <div class="bio reveal" style="max-width:64ch;margin-bottom:20px;">
+        <p>Au début, les décisions sont simples. Puis l'entreprise grandit. Les habitudes deviennent des systèmes. Les succès deviennent des certitudes. Les anciennes bonnes décisions deviennent parfois les nouveaux problèmes.</p>
+        <p>Et plus vous êtes à l'intérieur, plus certaines contradictions deviennent normales.</p>
+        <p>C'est précisément pour cela qu'un regard extérieur existe. Pas pour connaître votre entreprise mieux que vous. Pour voir ce que vous ne pouvez plus voir depuis l'endroit où vous êtes assis.</p>
+        <p>WarTime Way repose sur une conviction simple : <em>avant de chercher une meilleure réponse, assurez-vous d'avoir posé le bon problème.</em></p>
+        <p>Nous voulons devenir le cabinet auquel un dirigeant pense avant une décision importante, pas uniquement lorsque tout va mal.</p>
+      </div>
+
+      <div class="doc">
+        <div class="doc__text reveal">
+          <p class="mono dnote" style="color:#86C9A6;margin-top:0;">La doctrine complète — 59 pages, une heure de lecture, gratuit.</p>
+          <p>Ce n'est pas une plaquette. Si ce texte ne vous parle pas, nous ne sommes pas faits pour travailler ensemble. C'est aussi à ça que ça sert.</p>
+
+          <form class="dform" id="doctrine-form" name="doctrine" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="doctrine">
+            <p class="hp" hidden><label>Ne pas remplir&nbsp;: <input name="bot-field"></label></p>
+            <div class="dform__row">
+              <div class="field" style="flex:1 1 160px;">
+                <label for="d-prenom">Prénom</label>
+                <input type="text" id="d-prenom" name="prenom" autocomplete="given-name" required>
+              </div>
+              <div class="field" style="flex:2 1 220px;">
+                <label for="d-email">Email</label>
+                <input type="email" id="d-email" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <button class="btn btn--primary" type="submit">Télécharger la doctrine (PDF)</button>
+            <p class="mono dnote">Un email. Pas de relance automatique. Pas de newsletter.</p>
+          </form>
+
+          <div class="form-success" id="doctrine-success" role="status" aria-live="polite">
+            Merci. Votre lien de téléchargement s'ouvre&nbsp;: <a href="WarTime_Doctrine.pdf" download>WarTime_Doctrine.pdf</a>.
+          </div>
+        </div>
+
+        <div class="doc__aside reveal">
+          <div class="cover" role="img" aria-label="Couverture de la doctrine WarTime">
+            <span class="cover__top">Doctrine — Paris</span>
+            <div>
+              <div class="cover__title">WARTIME</div>
+              <p class="cover__sub">WarTime Way.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT — PL. 08
+       ========================================================= -->
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <span class="plate mono">08 — Commencer</span>
+      <h2 class="reveal">Commencer.</h2>
+      <p class="lede reveal">Répondez à quatre questions. Si nous pensons pouvoir produire une lecture que vous n'avez pas déjà, nous revenons vers vous sous 48 heures.</p>
+      <p class="method__mid reveal">Nous ne travaillons pas avec toutes les entreprises. <span class="steel">Un regard extérieur n'a de valeur que lorsqu'il voit quelque chose que vous ne voyez pas déjà.</span></p>
+
+      <form class="contact-grid reveal" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hp" hidden><label>Ne pas remplir&nbsp;: <input name="bot-field"></label></p>
+        <div class="field">
+          <label for="c-nom">Nom</label>
+          <input type="text" id="c-nom" name="nom" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field field--full">
+          <label for="c-activite">Votre activité en une phrase</label>
+          <input type="text" id="c-activite" name="activite" required>
+        </div>
+        <div class="field field--full">
+          <label for="c-blocage">Qu'est-ce qui n'avance plus aujourd'hui ?</label>
+          <textarea id="c-blocage" name="blocage" required></textarea>
+        </div>
+        <div class="field--full">
+          <button class="btn btn--primary" type="submit">Envoyer</button>
+        </div>
+      </form>
+
+      <div class="form-success" id="contact-success" role="status" aria-live="polite">
+        Reçu. Nous revenons vers vous sous 48 heures.
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PIED DE PAGE
+       ========================================================= -->
+  <footer class="foot">
+    <div class="foot__inner">
+      <span>WarTime Consulting — Paris</span>
+      <a href="mailto:wartimemail@gmail.com">wartimemail@gmail.com</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
