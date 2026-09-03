@@ -1,5 +1,8 @@
-import re, base64, pathlib
-src = open('tournage-317.html', encoding='utf-8').read()
+import re, base64, pathlib, sys
+SRC = sys.argv[1] if len(sys.argv) > 1 else 'tournage-317.html'
+OUT = sys.argv[2] if len(sys.argv) > 2 else 'print-317.html'
+BREAKS = sys.argv[3:] or ['Script minuté', 'Plan de tournage', 'Avant le jour J', 'Publication</span>']
+src = open(SRC, encoding='utf-8').read()
 src = re.sub(r'<script>.*?</script>', '', src, flags=re.S)
 src = re.sub(r'\s*<button class="reset".*?</button>', '', src, flags=re.S)
 faces = open('fonts-inline.css', encoding='utf-8').read()
@@ -48,7 +51,7 @@ th,td{ padding:.34rem .55rem; }
 .setup{ margin-bottom:1.3rem; }
 .tl{ min-width:0; }
 .tl-seg{ padding:.45rem .35rem; }
-.tl-seg .l{ font-size:.5rem; white-space:normal; overflow:visible; text-overflow:clip; line-height:1.25; }
+.tl-seg .l{ font-size:.48rem; white-space:normal; overflow:hidden; overflow-wrap:anywhere; hyphens:auto; text-overflow:clip; line-height:1.2; }
 .tl-seg .d{ font-size:.48rem; white-space:normal; line-height:1.25; }
 .tl-seg .n{ font-size:.85rem; }
 .check li{ padding:.2rem 0; }
@@ -64,6 +67,8 @@ input[type="checkbox"]{
   width:10px; height:10px; border:1px solid var(--ink-2); background:#fff; margin-top:.3rem;
 }
 .beat.peak{ margin-left:0; padding-left:.8rem; }
+.beat-head{ margin-bottom:.05rem; }
+.badge{ font-size:.52rem; padding:.1rem .3rem; }
 </style>
 """
 
@@ -76,9 +81,9 @@ doc = ('<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
        + body + '\n</body>\n</html>')
 
 # force a page break only before the four heavy sections
-for anchor in ('Script minuté', 'Plan de tournage', 'Avant le jour J', 'Publication</span>'):
+for anchor in BREAKS:
     i = doc.find(anchor)
     j = doc.rfind('<section>', 0, i)
     doc = doc[:j] + '<section class="pb">' + doc[j+len('<section>'):]
-pathlib.Path('tournage-317-print.html').write_text(doc, encoding='utf-8')
+pathlib.Path(OUT).write_text(doc, encoding='utf-8')
 print('ok', doc.count('section class="pb"'))
